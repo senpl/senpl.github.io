@@ -1,5 +1,5 @@
-function cleanResults(data) {
-    let locator='xzsf02u">'
+function cleanResults(data, locator='xzsf02u">') {
+    //let locator='xzsf02u">'
     endPos=0
     let endLocator='</span'
     let locator2=locator.replace('"','\"')

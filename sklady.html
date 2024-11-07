@@ -10,9 +10,11 @@
 </head>
 
 <body>
-
+    <p>
+    locator before names <input id="locatorToSearch" />
+    <p>Data from source site </p>
     <input id="fromFacebook" />
-    <button onclick="cleanResults(getElementById('fromFacebook').value)">Clean results</button>
+    <button onclick="cleanResults(getElementById('fromFacebook').value,getElementById('locatorToSearch').value)">Clean results</button>
     <p id="result"></p>
 </body>
 
