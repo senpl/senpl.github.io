@@ -1,5 +1,9 @@
 ☐ Dane w local storage
     ☐ bo ktoś mógłby sobie nie życzyć
+☐ Wypisywać rating przy zawodnikach
+    ☐ bo to zapobiega potencjalnym pomyłkom
+☐ Gdy nie znajdujemy kluczy można by znaleźć, czy mamy taki, który się tak samo zaczyna
+    ☐ i wtedy podstawiać
 ☐ Poprawić nie zbieranie całych nazwisk dla Zdanowski i Maciejewski
     ☐ bo tylko dl anich obcina
 ☐ Na sztywno wypisywanie po ratingu:
