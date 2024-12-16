@@ -1,0 +1,24 @@
+☐ Dane w local storage
+    ☐ bo ktoś mógłby sobie nie życzyć
+☐ Poprawić nie zbieranie całych nazwisk dla Zdanowski i Maciejewski
+    ☐ bo tylko dl anich obcina
+☐ Na sztywno wypisywanie po ratingu:
+    ☐ Drabinka na środę:
+        ☐ gdzie ostatni trafia do 2 i 3 picka
+    ☐ Drabinka na niedzielę:
+        ☐ Gdzie ostatni trafia do 1 pika
+☐ Parametr do znanych bramkarzy, żeby była opcja kto nie gra na bramce
+    ☐ Bo to jednak będzie się zmieniać
+☐ Dodać na sztywno rating jako osobne pole
+	☐ I lepszego przypisywać do najsłabszego zawodnika
+☐ Dodać stały rating i tymczasowy
+	☐ Dodać stałe ratingi, nie zmieniane na potrzeby chwili
+	☐ i chwilowe, na potrzeby urozmaicania składów
+☐ Dodać rating zapisywany w temp storaga
+    ☐ jako osobna strona
+    ☐ bo jednak to może za dużo na jeden raz
+    ☐ dodać oznaczanie bramkarza
+    ☐ I losowanie do drużyn na podstawie drużyny i oznaczenia bramkarza
+☐ Dodać zapis form
+☐ Granie w sezonie jako parametryzowany zapis
+☐ Poprawić zbieranie dla Bartek Pryszcz i Bartek Zdanowski, bo obcina ich wartości
