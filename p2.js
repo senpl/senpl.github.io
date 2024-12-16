@@ -50,17 +50,17 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
         }
     }
     let stableRanking = {
-        "Bartek Pryszcz": 6,
-        "Dawid Will": 8,
-        "Daniel Toporczyk": 7,
+        "Bartek Pryszcz": 6.0,
+        "Dawid Will": 8.0,
+        "Daniel Toporczyk": 7.0,
         "Bogumił Gr": 6.5,
         "Illia Leo Ti Lish": 1.2,
         "Paweł Maciejewski": 8.6,
         "Paweł Macieje": 8.6,
         "Roma Samkovskiy": 4.3,
-        "Yura Savchuk": 5,
+        "Yura Savchuk": 5.0,
         "Marek Ziober": 4.8,
-        "Kamil Kawa(BR)": 6,
+        "Kamil Kawa(BR)": 5.0,
         "Michał Siewniak": 5.8,
         "Rafał Chrzanowski(BR)": 3.5,
         "Adam Wisniewski": 7.8,
@@ -68,19 +68,19 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Aleksander Osmałek": 4.2,
         "Andrzej Doruchowski": 3.8,
         "Adam Syrek": 8.2,
-        "Oliwer Sulima": 3.9,
-        "Michal Ce": 4,
-        "Tobiasz Fuczek": 7.9,
+        "Oliwier Sulima": 3.9,
+        "Michal Ce": 4.0,
+        "Tobiasz Fuczek": 7.6,
         "Adam Piątek": 6.8,
-        "Mateusz Szyba": 9,
+        "Mateusz Szyba": 9.1,
         "Bartek Zda": 8.4,
         "Bartek Zdanowski": 8.4,
         "Szymon Śleziona(BR)": 3.8,
-        "Marcin Szkup": 1,
+        "Marcin Szkup": 1.1,
         "Daniel Tochwin": 8.2,
         "Michał Urbanek": 4.1,
         "Mateusz Ziober": 0.9,
-        "Marcin Ziober": 1
+        "Marcin Ziober": 1.0
     }
     if (niedzielneGranie) {
         stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 1.4
