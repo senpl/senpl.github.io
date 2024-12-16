@@ -64,6 +64,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Michał Siewniak": 5.8,
         "Rafał Chrzanowski(BR)": 3.5,
         "Adam Wisniewski": 7.8,
+        "Krzysiek Korzunowicz": 7.9,
         "Andrzej Kruczyński(BR)": 3.7,
         "Aleksander Osmałek": 4.2,
         "Andrzej Doruchowski": 3.8,
