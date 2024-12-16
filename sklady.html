@@ -12,9 +12,11 @@
 <body>
     <p>
     locator before names <input id="locatorToSearch" value='xzsf02u">'/>
+    <!-- known goalkeepers <input id="knownGoalkeepers" value='Andrzej Kruczyński, Szymon Śleziona, Kamil Kawa, Rafał Chrzanowski'/> -->
     <p>Data from source site </p>
     <input id="fromFacebook" />
-    <button onclick="cleanResults(getElementById('fromFacebook').value,getElementById('locatorToSearch').value)">Clean results</button>
+    <button onclick="cleanResults(getElementById('fromFacebook').value, false, getElementById('locatorToSearch').value)">Granie Środowe</button>
+    <button onclick="cleanResults(getElementById('fromFacebook').value, true, getElementById('locatorToSearch').value)">Granie Niedzielne</button>
     <p id="result"></p>
 </body>
 
