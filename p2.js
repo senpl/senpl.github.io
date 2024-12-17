@@ -153,7 +153,13 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
                 team1.push(player)
             }
         } else {
-            if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba'))) {
+            if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Macieje'))||team1.some(element => element.includes('Paweł Maciejewski')))) {
+                team2.splice(0, 1)
+                team1.push("Paweł Macieje")
+                team2.push(player)
+                team1.push(keysIterator.next().value)
+                team1.push(keysIterator.next().value)
+            } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba'))) {
                 team2.push(player);
                 team1.push(keysIterator.next().value)
                 team1.push(keysIterator.next().value)
