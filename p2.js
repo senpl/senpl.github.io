@@ -153,8 +153,18 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
                 team1.push(player)
             }
         } else {
-            console.log("GK Not found")
-            team1.push(player)
+            if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba'))) {
+                team2.push(player);
+                team1.push(keysIterator.next().value)
+                team1.push(keysIterator.next().value)
+            } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Paweł Macieje'))) {
+                team2.push(player);
+                team1.push(keysIterator.next().value)
+                team1.push(keysIterator.next().value)
+            } else {
+                console.log("GK Not found")
+                team1.push(player)
+            }
         }
     }
 }
