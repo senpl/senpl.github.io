@@ -50,13 +50,21 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
         }
     }
        //replace shorcut with full names
-       found=found.map((element=>element.replace("Bartek Pry", "Bartek Pryszcz").replace("Bartek Zdano", "Bartek Zdanowski").replace("Dawid Willan", "Dawid Will")))
-       const prefix = "Paweł Mac";
-       const replacement = "Paweł Maciejewski";
-       const updatedArray = found.map(item => 
-           item.startsWith(prefix) ? item.replace(prefix, replacement) : item
-         );
-       found=updatedArray
+       found=found.map((element=>element.replace("Dawid Willan", "Dawid Will")))
+       function replaceStringsStartingWith(array, prefix, newValue) {
+        return array.map(item => 
+            item.startsWith(prefix) ? newValue : item
+          );
+      }
+      if(found.filter(element=>element.startsWith("Paweł Mac"))){
+        found=replaceStringsStartingWith(found,"Paweł Mac","Paweł Maciejewski")
+      }
+      if(found.filter(element=>element.startsWith("Bartek Pry"))){
+        found=replaceStringsStartingWith(found,"Bartek Pry","Bartek Pryszcz")
+      }
+      if(found.filter(element=>element.startsWith("Bartek Zda"))){
+        found=replaceStringsStartingWith(found,"Bartek Zda","Bartek Zdanowski")
+      }
        console.log(found)
        let stableRanking = {
            "Bartek Pryszcz": 6.8,
@@ -84,7 +92,6 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
            "Tobiasz Fuczek": 7.9,
            "Adam Piątek": 6.9,
            "Mateusz Szyba": 8.7,
-           "Bartek Zda": 8.4,
            "Bartek Zdanowski": 8.4,
            "Szymon Śleziona(BR)": 5.3,
            "Marcin Szkup": 3.1,
