@@ -49,44 +49,54 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
             found[index] = found[index] + "(BR)"
         }
     }
-    let stableRanking = {
-        "Bartek Pryszcz": 6.8,
-        "Dawid Will": 8.0,
-        "Daniel Toporczyk": 7.5,
-        "Bogumił Gr": 7.0,
-        "Illia Leo Ti Lish": 1.2,
-        "Paweł Maciejewski": 8.6,
-        "Paweł Macieje": 8.6,
-        "Roma Samkovskiy": 4.3,
-        "Yura Savchuk": 6.7,
-        "Marek Ziober": 4.8,
-        "Kamil Kawa(BR)": 5.0,
-        "Michał Siewniak": 5.8,
-        "Rafał Chrzanowski(BR)": 3.5,
-        "Adam Wisniewski": 7.6,
-        "Krzysiek Korzunowicz": 7.8,
-        "Andrzej Kruczyński(BR)": 3.7,
-        "Aleksander Osmałek": 4.2,
-        "Andrzej Doruchowski": 6.5,
-        "Adam Syrek": 8.2,
-        "Oliwier Sulima": 3.9,
-        "Michal Ce": 6.6,
-        "Tobiasz Fuczek": 7.9,
-        "Adam Piątek": 6.9,
-        "Mateusz Szyba": 8.7,
-        "Bartek Zda": 8.4,
-        "Bartek Zdanowski": 8.4,
-        "Szymon Śleziona(BR)": 3.8,
-        "Marcin Szkup": 3.1,
-        "Daniel Tochwin": 8.2,
-        "Michał Urbanek": 4.1,
-        "Mateusz Ziober": 0.9,
-        "Marcin Ziober": 3.0
-    }
+       //replace shorcut with full names
+       found=found.map((element=>element.replace("Bartek Pry", "Bartek Pryszcz").replace("Bartek Zdano", "Bartek Zdanowski").replace("Dawid Willan", "Dawid Will")))
+       const prefix = "Paweł Mac";
+       const replacement = "Paweł Maciejewski";
+       const updatedArray = found.map(item => 
+           item.startsWith(prefix) ? item.replace(prefix, replacement) : item
+         );
+       found=updatedArray
+       console.log(found)
+       let stableRanking = {
+           "Bartek Pryszcz": 6.8,
+           "Bartek Pry": 6.8,
+           "Dawid Will": 8.0,
+           "Daniel Toporczyk": 7.5,
+           "Bogumił Gr": 7.0,
+           "Illia Leo Ti Lish": 1.2,
+           "Paweł Maciejewski": 8.6,
+           "Roma Samkovskiy": 4.3,
+           "Yura Savchuk": 6.7,
+           "Marek Ziober": 4.8,
+           "Kamil Kawa(BR)": 6.0,
+           "Michał Siewniak": 5.8,
+           "Rafał Chrzanowski(BR)": 3.5,
+           "Adam Wisniewski": 7.6,
+           "Krzysiek Korzunowicz": 7.8,
+           "Kwa Kwa": 7.8,
+           "Andrzej Kruczyński(BR)": 3.7,
+           "Aleksander Osmałek": 4.2,
+           "Andrzej Doruchowski": 6.5,
+           "Adam Syrek": 7.7,
+           "Oliwier Sulima": 3.9,
+           "Michal Ce": 4.5,
+           "Tobiasz Fuczek": 7.9,
+           "Adam Piątek": 6.9,
+           "Mateusz Szyba": 8.7,
+           "Bartek Zda": 8.4,
+           "Bartek Zdanowski": 8.4,
+           "Szymon Śleziona(BR)": 5.3,
+           "Marcin Szkup": 3.1,
+           "Daniel Tochwin": 8.2,
+           "Michał Urbanek": 4.1,
+           "Mateusz Ziober": 0.9,
+           "Marcin Ziober": 3.0,
+           "Maciek ERa": 3.2
+       }
     if (niedzielneGranie) {
         stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 1.4
         stableRanking["Paweł Maciejewski"] = stableRanking["Paweł Maciejewski"] - 1.4
-        stableRanking["Paweł Macieje"] = stableRanking["Paweł Maciejewski"] - 1.4
     }
     let playersWithRating = new Map()
     found.forEach(element => {
@@ -153,7 +163,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
                 team1.push(player)
             }
         } else {
-            if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Macieje'))||team1.some(element => element.includes('Paweł Maciejewski')))) {
+            if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Maciejewski')))) {
                 team2.splice(0, 1)
                 team1.push("Paweł Macieje")
                 team2.push(player)
@@ -163,7 +173,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
                 team2.push(player);
                 team1.push(keysIterator.next().value)
                 team1.push(keysIterator.next().value)
-            } else if (player.includes("Dawid Will") && (team1.some(element => element.includes('Paweł Macieje'))||team1.some(element => element.includes('Paweł Maciejewski')))) {
+            } else if (player.includes("Dawid Will") && (team1.some(element => element.includes('Paweł Maciejewski')))) {
                 team2.push(player);
                 team1.push(keysIterator.next().value)
                 team1.push(keysIterator.next().value)
