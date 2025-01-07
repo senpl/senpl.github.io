@@ -65,6 +65,9 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
       if(found.filter(element=>element.startsWith("Bartek Zda"))){
         found=replaceStringsStartingWith(found,"Bartek Zda","Bartek Zdanowski")
       }
+      if(found.filter(element=>element.startsWith("Kwa Kwa"))){
+        found=replaceStringsStartingWith(found,"Kwa Kwa","Ryba")
+      }
        console.log(found)
        let stableRanking = {
            "Bartek Pryszcz": 6.8,
@@ -81,8 +84,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
            "Michał Siewniak": 5.8,
            "Rafał Chrzanowski(BR)": 3.5,
            "Adam Wisniewski": 7.6,
-           "Krzysiek Korzunowicz": 7.8,
-           "Kwa Kwa": 7.8,
+           "Ryba": 7.8, //Ryba alias Krzysiek K.
            "Andrzej Kruczyński(BR)": 3.7,
            "Aleksander Osmałek": 4.2,
            "Andrzej Doruchowski": 6.5,
