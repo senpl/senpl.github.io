@@ -70,8 +70,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
       }
        console.log(found)
        let stableRanking = {
-           "Bartek Pryszcz": 6.8,
-           "Bartek Pry": 6.8,
+           "Bartek Pryszcz": 4.0,
            "Dawid Will": 8.0,
            "Daniel Toporczyk": 7.5,
            "Bogumił Gr": 7.0,
@@ -145,6 +144,19 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
     addIfGkToOtherTeam(playerToAdd2, team1, team2);
     playerToAdd = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team2, team1);
+    if(niedzielneGranie==false){  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+        swapGKsInWansday(team1,team2)
+    }
+    function swapGKsInWansday(team1,team2){
+        if(team1.some(element=>element.includes('(BR)')) && team2.some(element=>element.includes('(BR)'))){
+            let gk1 = team1.find(element=>element.includes('(BR)'))
+            let gk2 = team2.find(element=>element.includes('(BR)'))
+            team1 = team1.filter(element=>!element.includes('(BR)'))
+            team2 = team2.filter(element=>!element.includes('(BR)'))
+            team1.push(gk2)
+            team2.push(gk1)
+        }
+    }
 
     let finalAssign = "Team 1    Team 2"
     console.log("Team 1    Team 2")
