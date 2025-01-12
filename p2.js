@@ -34,11 +34,16 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
     let data28 = data27.substring(0, data27.indexOf(endLocator) + endPos).replace('</sp', '').replace('</s', '')
     let data29 = data27.substring(data27.indexOf(locator) + locator.length)
     let data30 = data29.substring(0, data29.indexOf(endLocator) + endPos).replace('</sp', '').replace('</s', '')
+    let found = [data1, data4, data6, data8, data10, data12, data14, data16, data18, data20, data22, data24, data26, data28]
+    if(data30.length>3){
+        found.push(data30)
+    }
     let data31 = data29.substring(data29.indexOf(locator) + locator.length)
     let data32 = data31.substring(0, data31.indexOf(endLocator) + endPos).replace('</sp', '').replace('</s', '')
-
-    let found = [data1, data4, data6, data8, data10, data12, data14, data16, data18, data20, data22, data24, data26, data28, data30, data32
-    ]
+    if(data32.length>3){
+        found.push(data32)
+    }
+    
     found = found.filter((el) => !el.includes("Znajomi") && !el.includes("Inni"))
     let knownGoalkeepers = ["Andrzej Kruczyński", "Szymon Śleziona", "Kamil Kawa", "Rafał Chrzanowski"]
     for (let index = 0; index < found.length; index++) {
@@ -55,6 +60,9 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
         return array.map(item => 
             item.startsWith(prefix) ? newValue : item
           );
+      }
+      if(found.filter(element=>element.startsWith("Bogumił Grz"))){
+        found=replaceStringsStartingWith(found,"Bogumił Grz","Bogumił Gr")
       }
       if(found.filter(element=>element.startsWith("Paweł Mac"))){
         found=replaceStringsStartingWith(found,"Paweł Mac","Paweł Maciejewski")
@@ -103,7 +111,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
            "Maciek ERa": 3.2
        }
     if (niedzielneGranie) {
-        stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 1.4
+        //stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.5
         stableRanking["Paweł Maciejewski"] = stableRanking["Paweł Maciejewski"] - 1.4
     }
     let playersWithRating = new Map()
@@ -141,9 +149,13 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
+    if(found.length>12){
     addIfGkToOtherTeam(playerToAdd2, team1, team2);
     playerToAdd = keysIterator.next().value;
-    addIfGkToOtherTeam(playerToAdd, team2, team1);
+    }
+    if(found.length>13){
+        addIfGkToOtherTeam(playerToAdd, team2, team1);
+    }
     if(niedzielneGranie==false){  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
         swapGKsInWansday(team1,team2)
     }
