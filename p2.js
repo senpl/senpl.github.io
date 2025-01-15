@@ -76,6 +76,12 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
       if(found.filter(element=>element.startsWith("Kwa Kwa"))){
         found=replaceStringsStartingWith(found,"Kwa Kwa","Ryba")
       }
+      if(found.filter(element=>element.startsWith("Maciek ER"))){
+        found=replaceStringsStartingWith(found,"Maciek ER","Maciek ERa")
+      }
+      if(found.filter(element=>element.startsWith("Roma Sam"))){
+        found=replaceStringsStartingWith(found,"Roma Sam","Roma Samkovskiy")
+      }
        console.log(found)
        let stableRanking = {
         "Andrzej Rukojć": 5.0,
