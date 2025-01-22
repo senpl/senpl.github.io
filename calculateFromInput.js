@@ -14,6 +14,11 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         }
     }
     //replace shorcut with full names
+    function replaceStringsStartingWith(array, prefix, newValue) {
+        return array.map(item =>
+            item.startsWith(prefix) ? newValue : item
+        );
+    }
     if(found.filter(element=>element.startsWith("Dawid Wil"))){
         found = replaceStringsStartingWith(found,"Dawid Wil","Dawid Will")
     }
@@ -31,6 +36,9 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     }
     if (found.filter(element => element.startsWith("Kwa Kwa"))) {
         found = replaceStringsStartingWith(found, "Kwa Kwa", "Ryba")
+    }
+    if (found.filter(element => element.startsWith("Maciek ERa"))) {
+        found = replaceStringsStartingWith(found, "Maciek ERa", "Maciek ERa")
     }
     console.log(found)
     let stableRanking = {
@@ -54,8 +62,8 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Aleksander Osmałek": 4.2,
         "Andrzej Doruchowski": 6.5,
         "Adam Syrek": 7.9,
-        "Oliwier Sulima": 3.9,
-        "Michal Ce": 4.5,
+        "Oliwier Sulima": 3.6,
+        "Michal Ce": 3.9,
         "Tobiasz Fuczek": 7.8,
         "Adam Piątek": 7.2,
         "Mateusz Szyba": 8.7,
@@ -63,10 +71,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Szymon Śleziona(BR)": 5.3,
         "Marcin Szkup": 3.5,
         "Daniel Tochwin": 8.2,
-        "Michał Urbanek": 3.9,
+        "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
-        "Maciek ERa": 3.2,
+        "Maciek ERa": 3.9,
         "Wiktor Ostolski": 5.6
     }
     if (niedzielneGranie) {
@@ -115,8 +123,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     if (found.length > 13) {
         addIfGkToOtherTeam(playerToAdd, team2, team1);
     }
-    if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
-        swapGKsInWansday(team1, team2)
+    if (niedzielneGranie == false ) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+        let {team1: team1swap, team2: team2swap} = swapGKsInWansday(team1, team2);
+        team1 = team1swap;
+        team2 = team2swap;
     }
     function swapGKsInWansday(team1, team2) {
         if (team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
@@ -126,6 +136,14 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             team2 = team2.filter(element => !element.includes('(BR)'))
             team1.push(gk2)
             team2.push(gk1)
+            return {team1, team2}
+        } else if(team1.some(element => element.includes('(BR)')) && !team2.some(element => element.includes('(BR)'))){
+            let gk1 = team1.find(element => element.includes('(BR)'))
+            team1 = team1.filter(element => !element.includes('(BR)'))
+            let playerToTeam1 = team2.splice(5, 1);
+            team1.push(playerToTeam1.toString());
+            team2.push(gk1);
+            return {team1, team2}
         }
     }
 
