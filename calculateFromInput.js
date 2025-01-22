@@ -144,6 +144,8 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             team1.push(playerToTeam1.toString());
             team2.push(gk1);
             return {team1, team2}
+        } else {
+            return {team1,team2}
         }
     }
 
