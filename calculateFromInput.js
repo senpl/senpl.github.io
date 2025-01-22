@@ -14,11 +14,8 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         }
     }
     //replace shorcut with full names
-    found = found.map((element => element.replace("Dawid Willan", "Dawid Will")))
-    function replaceStringsStartingWith(array, prefix, newValue) {
-        return array.map(item =>
-            item.startsWith(prefix) ? newValue : item
-        );
+    if(found.filter(element=>element.startsWith("Dawid Wil"))){
+        found = replaceStringsStartingWith(found,"Dawid Wil","Dawid Will")
     }
     if (found.filter(element => element.startsWith("Bogumił Grz"))) {
         found = replaceStringsStartingWith(found, "Bogumił Grz", "Bogumił Gr")
@@ -47,18 +44,19 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Roma Samkovskiy": 4.3,
         "Yura Savchuk": 6.7,
         "Marek Ziober": 4.8,
+        "Kamil Kawa": 3.9,
         "Kamil Kawa(BR)": 6.0,
         "Michał Siewniak": 5.8,
         "Rafał Chrzanowski(BR)": 3.5,
         "Adam Wisniewski": 7.6,
-        "Ryba": 7.8, //Ryba alias Krzysiek K.
+        "Ryba": 7.7, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 3.7,
         "Aleksander Osmałek": 4.2,
         "Andrzej Doruchowski": 6.5,
-        "Adam Syrek": 7.7,
+        "Adam Syrek": 7.9,
         "Oliwier Sulima": 3.9,
         "Michal Ce": 4.5,
-        "Tobiasz Fuczek": 7.9,
+        "Tobiasz Fuczek": 7.8,
         "Adam Piątek": 7.2,
         "Mateusz Szyba": 8.7,
         "Bartek Zdanowski": 8.4,
