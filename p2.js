@@ -178,14 +178,14 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
 
     let finalAssign = "Team 1    Team 2"
     console.log("Team 1    Team 2")
-    for (let index = 0; index < 14; index++) {
+    for (let index = 0; index < found.length; index++) {
         finalAssign = finalAssign + '<br></br>'
         console.log('\n')
-        
-        finalAssign = finalAssign + found[index++] + ' / ' + found[index] + ' / '
-
-        console.log(found[index])
-        console.log(' / ')
+        if (index == found.length - 1) {
+            finalAssign = finalAssign + found[index];
+        } else {
+            finalAssign = finalAssign + found[index] + ' / '
+        }
         console.log(found[index])
         console.log(' / ')
     }
