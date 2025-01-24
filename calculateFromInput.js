@@ -75,7 +75,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
         "Maciek ERa": 3.9,
-        "Wiktor Ostolski": 5.6
+        "Wiktor Ostolski": 6.8
     }
     if (niedzielneGranie) {
         stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.2
