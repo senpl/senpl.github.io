@@ -27,7 +27,7 @@ Wiktor Ostolski /
 
 Adam Piątek`
 
-calculateSquads(testString,true)
+// calculateSquads(testString,true)
 
 function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(data)
@@ -109,8 +109,8 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Wiktor Ostolski": 6.8
     }
     if (niedzielneGranie) {
-        stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.2
-        stableRanking["Paweł Maciejewski"] = stableRanking["Paweł Maciejewski"] - 1.4
+        stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.0
+        stableRanking["Paweł Maciejewski"] = stableRanking["Paweł Maciejewski"] - 0.4
     }
     let playersWithRating = new Map()
     found.forEach(element => {
@@ -197,6 +197,9 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     document.getElementById('result').innerHTML = finalAssign
 
     function addIfGkToOtherTeam(player, team1, team2) {
+        if(player==undefined){
+            return
+        }
         if (player.includes(('(BR)'))) {
             const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
             if (team1AlreadyGotBR) {
