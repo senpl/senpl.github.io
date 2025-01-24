@@ -1,4 +1,4 @@
-let testString=`
+let testString = `
 Michał Urbanek /
 
 Bartek Prys /
@@ -27,7 +27,7 @@ Wiktor Ostolski /
 
 Adam Piątek`
 
-// calculateSquads(testString,true)
+calculateSquads(testString, true)
 
 function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(data)
@@ -50,8 +50,8 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             item.startsWith(prefix) ? newValue : item
         );
     }
-    if(found.filter(element=>element.startsWith("Dawid Wil"))){
-        found = replaceStringsStartingWith(found,"Dawid Wil","Dawid Will")
+    if (found.filter(element => element.startsWith("Dawid Wil"))) {
+        found = replaceStringsStartingWith(found, "Dawid Wil", "Dawid Will")
     }
     if (found.filter(element => element.startsWith("Bogumił Grz"))) {
         found = replaceStringsStartingWith(found, "Bogumił Grz", "Bogumił Gr")
@@ -128,7 +128,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     const keysIterator = sortedByRating.keys();
     let team1 = [keysIterator.next().value]
     let team2 = [keysIterator.next().value]
-    let playerToAdd2=keysIterator.next().value;
+    let playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd2, team2, team1);
     let playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
@@ -138,10 +138,15 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team2, team1);
     addIfGkToOtherTeam(playerToAdd2, team2, team1);
+    console.log("team1")
+    console.log(team1)
+    console.log("team2")
+    console.log(team2)
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
     addIfGkToOtherTeam(playerToAdd2, team1, team2);
+
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team2, team1);
@@ -156,8 +161,8 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     if (found.length > 13) {
         addIfGkToOtherTeam(playerToAdd, team2, team1);
     }
-    if (niedzielneGranie == false ) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
-        let {team1: team1swap, team2: team2swap} = swapGKsInWansday(team1, team2);
+    if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+        let { team1: team1swap, team2: team2swap } = swapGKsInWansday(team1, team2);
         team1 = team1swap;
         team2 = team2swap;
     }
@@ -169,20 +174,20 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             team2 = team2.filter(element => !element.includes('(BR)'))
             team1.push(gk2)
             team2.push(gk1)
-            return {team1, team2}
-        } else if(team1.some(element => element.includes('(BR)')) && !team2.some(element => element.includes('(BR)'))){
+            return { team1, team2 }
+        } else if (team1.some(element => element.includes('(BR)')) && !team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(element => element.includes('(BR)'))
             team1 = team1.filter(element => !element.includes('(BR)'))
             let playerToTeam1 = team2.splice(5, 1);
             team1.push(playerToTeam1.toString());
             team2.push(gk1);
-            return {team1, team2}
+            return { team1, team2 }
         } else {
-            return {team1,team2}
+            return { team1, team2 }
         }
     }
-    team1=team1.filter(element => element);
-    team2=team2.filter(element => element);
+    team1 = team1.filter(element => element);
+    team2 = team2.filter(element => element);
     let finalAssign = "Team 1    Team 2"
     console.log("Team 1    Team 2")
     for (let index = 0; index < 8; index++) {
@@ -197,23 +202,20 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     document.getElementById('result').innerHTML = finalAssign
 
     function addIfGkToOtherTeam(player, team1, team2) {
-        if(player==undefined){
+        if (player == undefined) {
             return
         }
-        if (player.includes(('(BR)'))) {
-            const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
-            if (team1AlreadyGotBR) {
+        const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
+        if (team1AlreadyGotBR) {
+            if (player.includes(('(BR)'))) {
                 console.log("GK FOUND ")
-                if (team2.length > 7) {
-                    team1.push(team2.pop())
-                }else{
-                    team2.push(player)
-                }
+                team1.push(team2.pop())
+                team2.push(player)
             } else {
                 team1.push(player)
             }
         } else {
-            if(player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))){
+            if (player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))) {
                 team2.push(player)
             } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Maciejewski')))) {
                 team2.splice(0, 1)
@@ -232,13 +234,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             } else {
                 if (team1.length >= 7) {
                     team2.push(player)
-                    // team1.push(team2.pop())
-                    // team1=team1.filter(element => element);
-                    // team2=team2.filter(element => element);
-                    } else{
-                        console.log("GK Not found")
-                        team1.push(player)
-                    }
+                } else{
+                console.log("GK Not found")
+                team1.push(player)
+                }
             }
         }
     }
