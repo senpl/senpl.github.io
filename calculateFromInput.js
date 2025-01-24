@@ -1,3 +1,34 @@
+let testString=`
+Michał Urbanek /
+
+Bartek Prys /
+
+Bartek Zdanows /
+
+Maciek ERan> /
+
+Dawid Wil /
+
+Andrzej Rukojć /
+
+Paweł Maciejewski /
+
+Szymon Śleziona(BR) /
+
+Kamil Kawa(BR) /
+
+Marcin Szkup /
+
+Yura Savchuk /
+
+Andrzej Doruchowski /
+
+Wiktor Ostolski /
+
+Adam Piątek`
+
+calculateSquads(testString,true)
+
 function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(data)
     let found = data.split('/')
@@ -96,9 +127,11 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(sortedByRating);
     const keysIterator = sortedByRating.keys();
     let team1 = [keysIterator.next().value]
-    let team2 = [keysIterator.next().value, keysIterator.next().value]
+    let team2 = [keysIterator.next().value]
+    let playerToAdd2=keysIterator.next().value;
+    addIfGkToOtherTeam(playerToAdd2, team2, team1);
     let playerToAdd = keysIterator.next().value;
-    let playerToAdd2 = keysIterator.next().value;
+    playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
     addIfGkToOtherTeam(playerToAdd2, team1, team2);
     playerToAdd = keysIterator.next().value;
@@ -148,10 +181,11 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             return {team1,team2}
         }
     }
-
+    team1=team1.filter(element => element);
+    team2=team2.filter(element => element);
     let finalAssign = "Team 1    Team 2"
     console.log("Team 1    Team 2")
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 8; index++) {
         finalAssign = finalAssign + '<br></br>'
         console.log('\n')
         finalAssign = finalAssign + team1[index] + ' / ' + team2[index]
@@ -163,21 +197,24 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     document.getElementById('result').innerHTML = finalAssign
 
     function addIfGkToOtherTeam(player, team1, team2) {
-        const containsSubstring = team1.some(element => element.includes('(BR)'));
-        if (containsSubstring) {
-            if (player.includes(('(BR)'))) {
+        if (player.includes(('(BR)'))) {
+            const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
+            if (team1AlreadyGotBR) {
                 console.log("GK FOUND ")
-                if (team2.length = 7) {
+                if (team2.length > 7) {
                     team1.push(team2.pop())
+                }else{
+                    team2.push(player)
                 }
-                team2.push(player)
             } else {
                 team1.push(player)
             }
         } else {
-            if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Maciejewski')))) {
+            if(player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))){
+                team2.push(player)
+            } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Maciejewski')))) {
                 team2.splice(0, 1)
-                team1.push("Paweł Macieje")
+                team1.push("Paweł Maciejewski")
                 team2.push(player)
                 team1.push(keysIterator.next().value)
                 team1.push(keysIterator.next().value)
@@ -190,8 +227,15 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
                 team1.push(keysIterator.next().value)
                 team1.push(keysIterator.next().value)
             } else {
-                console.log("GK Not found")
-                team1.push(player)
+                if (team1.length >= 7) {
+                    team2.push(player)
+                    // team1.push(team2.pop())
+                    // team1=team1.filter(element => element);
+                    // team2=team2.filter(element => element);
+                    } else{
+                        console.log("GK Not found")
+                        team1.push(player)
+                    }
             }
         }
     }
