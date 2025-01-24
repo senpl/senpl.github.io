@@ -27,7 +27,7 @@ Wiktor Ostolski /
 
 Adam Piątek`
 
-calculateSquads(testString, true)
+// calculateSquads(testString, true)
 
 function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(data)
