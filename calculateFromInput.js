@@ -91,10 +91,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Ryba": 7.7, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 3.7,
         "Aleksander Osmałek": 4.2,
-        "Andrzej Doruchowski": 6.5,
+        "Andrzej Doruchowski": 5.5,
         "Adam Syrek": 7.9,
         "Oliwier Sulima": 3.6,
-        "Michal Ce": 3.9,
+        "Michal Ce": 4.9,
         "Tobiasz Fuczek": 7.8,
         "Adam Piątek": 7.2,
         "Mateusz Szyba": 8.7,
@@ -105,7 +105,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
-        "Maciek ERa": 3.9,
+        "Maciek ERa": 5.9,
         "Wiktor Ostolski": 6.8
     }
     if (niedzielneGranie) {
