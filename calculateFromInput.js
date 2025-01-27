@@ -155,17 +155,27 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
     if (found.length > 12) {
-        addIfGkToOtherTeam(playerToAdd2, team1, team2);
-        playerToAdd = keysIterator.next().value;
+        if(niedzielneGranie==true){
+            addIfGkToOtherTeam(playerToAdd2, team2, team1);
+            playerToAdd = keysIterator.next().value;        
+        }else{
+            addIfGkToOtherTeam(playerToAdd2, team1, team2);
+            playerToAdd = keysIterator.next().value;
+        }
     }
     if (found.length > 13) {
-        addIfGkToOtherTeam(playerToAdd, team2, team1);
+        if(niedzielneGranie==true){
+            addIfGkToOtherTeam(playerToAdd2, team1, team2);
+            playerToAdd = keysIterator.next().value;        
+        }else{
+            addIfGkToOtherTeam(playerToAdd, team2, team1);
+        }
     }
-    if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+    // if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
         let { team1: team1swap, team2: team2swap } = swapGKsInWansday(team1, team2);
         team1 = team1swap;
         team2 = team2swap;
-    }
+    // }
     function swapGKsInWansday(team1, team2) {
         if (team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(element => element.includes('(BR)'))
