@@ -171,11 +171,11 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
             addIfGkToOtherTeam(playerToAdd, team2, team1);
         }
     }
-    // if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+    if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
         let { team1: team1swap, team2: team2swap } = swapGKsInWansday(team1, team2);
         team1 = team1swap;
         team2 = team2swap;
-    // }
+    }
     function swapGKsInWansday(team1, team2) {
         if (team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(element => element.includes('(BR)'))
