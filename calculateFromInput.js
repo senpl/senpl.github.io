@@ -1,33 +1,33 @@
 let testString = `
-Michał Urbanek /
-
-Bartek Prys /
+Bartek Pryszcz /
 
 Bartek Zdanows /
 
-Maciek ERan> /
+Dawid Willan /
 
-Dawid Wil /
+Maciek ER /
 
-Andrzej Rukojć /
+Paweł Mac /
 
-Paweł Maciejewski /
-
-Szymon Śleziona(BR) /
-
-Kamil Kawa(BR) /
-
-Marcin Szkup /
-
-Yura Savchuk /
+Roma Samkovskiy /
 
 Andrzej Doruchowski /
 
+Kamil Kawa(BR) /
+
+Szymon Śleziona(BR) /
+
+Marcin Szkup /
+
+Mateusz Ziober /
+
 Wiktor Ostolski /
+
+Michal Ce /
 
 Adam Piątek`
 
-// calculateSquads(testString, true)
+// calculateSquads(testString, false)
 
 function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(data)
@@ -109,7 +109,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Wiktor Ostolski": 6.8
     }
     if (niedzielneGranie) {
-        stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.0
+        stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.2
         stableRanking["Paweł Maciejewski"] = stableRanking["Paweł Maciejewski"] - 0.4
     }
     let playersWithRating = new Map()
@@ -172,18 +172,25 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         }
     }
     if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
-        let { team1: team1swap, team2: team2swap } = swapGKsInWansday(team1, team2);
+        let { team1: team1swap, team2: team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
         team1 = team1swap;
         team2 = team2swap;
     }
-    function swapGKsInWansday(team1, team2) {
+    function  swapGKsIfTeam2GotWeaker(team1, team2) {
         if (team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(element => element.includes('(BR)'))
             let gk2 = team2.find(element => element.includes('(BR)'))
             team1 = team1.filter(element => !element.includes('(BR)'))
             team2 = team2.filter(element => !element.includes('(BR)'))
-            team1.push(gk2)
-            team2.push(gk1)
+            gk1Rating=stableRanking[gk1]
+            gk2Rating=stableRanking[gk2]
+            if(gk1Rating>gk2Rating){
+                    team1.push(gk2)
+                    team2.push(gk1)}
+                else{
+                    team1.push(gk1)
+                    team2.push(gk2)
+                }
             return { team1, team2 }
         } else if (team1.some(element => element.includes('(BR)')) && !team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(element => element.includes('(BR)'))
