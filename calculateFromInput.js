@@ -74,14 +74,14 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     console.log(found)
     let stableRanking = {
         "Andrzej Rukojć": 5.0,
-        "Bartek Pryszcz": 4.0,
+        "Bartek Pryszcz": 5.6,
         "Dawid Will": 8.0,
         "Daniel Toporczyk": 7.5,
         "Bogumił Gr": 7.0,
         "Illia Leo Ti Lish": 1.2,
         "Paweł Maciejewski": 8.6,
-        "Roma Samkovskiy": 4.3,
-        "Yura Savchuk": 6.7,
+        "Roma Samkovskiy": 4.5,
+        "Yura Savchuk": 6.2,
         "Marek Ziober": 4.8,
         "Kamil Kawa": 3.9,
         "Kamil Kawa(BR)": 6.0,
@@ -105,7 +105,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
-        "Maciek ERa": 5.9,
+        "Maciek ERa": 5.7,
         "Wiktor Ostolski": 6.8
     }
     if (niedzielneGranie) {
