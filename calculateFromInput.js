@@ -259,15 +259,11 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
 
     function checkIfTeamGot3DefensiveCapable( team1) {
             let team1Defenders = team1.filter(element => defenceRanking[element]>6.0)
-            // let team2Defenders = team2.filter(element => defenceRanking[element]>6.0)
             if(team1Defenders.length>=3){
                 return true
             }else{
                 return false
             }
-            // if(team2Defenders.length>=3){
-            //     return true
-            // }
     }
     
     function addIfGkToOtherTeam(player, team1, team2) {
