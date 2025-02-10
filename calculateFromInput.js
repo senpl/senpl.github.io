@@ -1,31 +1,5 @@
 let testString = `
-Bartek Pryszcz /
-
-Bartek Zdanows /
-
-Dawid Willan /
-
-Maciek ER /
-
-Paweł Mac /
-
-Roma Samkovskiy /
-
-Andrzej Doruchowski /
-
-Kamil Kawa(BR) /
-
-Szymon Śleziona(BR) /
-
-Marcin Szkup /
-
-Mateusz Ziober /
-
-Wiktor Ostolski /
-
-Michal Ce /
-
-Adam Piątek`
+ Michał Urbanek /  Bartek Prys /  Bartek Zdanows /  Paweł Maciejewsk /  Dawid Willan> /  Roma Samkovskiy /  Andrzej Doruchowski /  Kamil Kawa(BR) /  Adam Wisniewski /  Szymon Śleziona(BR) /  Marcin Szkup /  Adam Piątek`
 
 // calculateSquads(testString, false)
 
@@ -72,22 +46,23 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         found = replaceStringsStartingWith(found, "Maciek ERa", "Maciek ERa")
     }
     console.log(found)
+    let desiredQueue = []
     let stableRanking = {
         "Andrzej Rukojć": 5.0,
-        "Bartek Pryszcz": 4.0,
+        "Bartek Pryszcz": 6.7,
         "Dawid Will": 8.0,
         "Daniel Toporczyk": 7.5,
         "Bogumił Gr": 7.0,
         "Illia Leo Ti Lish": 1.2,
         "Paweł Maciejewski": 8.6,
-        "Roma Samkovskiy": 4.3,
-        "Yura Savchuk": 6.7,
+        "Roma Samkovskiy": 5.3,
+        "Yura Savchuk": 6.6,
         "Marek Ziober": 4.8,
         "Kamil Kawa": 3.9,
         "Kamil Kawa(BR)": 6.0,
         "Michał Siewniak": 5.8,
         "Rafał Chrzanowski(BR)": 3.5,
-        "Adam Wisniewski": 7.6,
+        "Adam Wisniewski": 7.1,
         "Ryba": 7.7, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 3.7,
         "Aleksander Osmałek": 4.2,
@@ -96,9 +71,9 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Oliwier Sulima": 3.6,
         "Michal Ce": 4.9,
         "Tobiasz Fuczek": 7.8,
-        "Adam Piątek": 7.2,
+        "Adam Piątek": 7.3,
         "Mateusz Szyba": 8.7,
-        "Bartek Zdanowski": 8.4,
+        "Bartek Zdanowski": 8.8,
         "Szymon Śleziona(BR)": 5.3,
         "Marcin Szkup": 3.5,
         "Daniel Tochwin": 8.2,
@@ -106,7 +81,45 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
         "Maciek ERa": 5.9,
-        "Wiktor Ostolski": 6.8
+        "Wiktor Ostolski": 6.8,
+        "Sławomir Jeleń": 2.6
+    }
+    let defenceRanking = {
+        "Andrzej Rukojć": 5.8,
+        "Bartek Pryszcz": 6.8,
+        "Dawid Will": 8.5,
+        "Daniel Toporczyk": 8.5,
+        "Bogumił Gr": 8.9,
+        "Illia Leo Ti Lish": 0.7,
+        "Paweł Maciejewski": 5.3,
+        "Roma Samkovskiy": 6.3,
+        "Yura Savchuk": 3.7,
+        "Marek Ziober": 3.8,
+        "Kamil Kawa": 5.9,
+        "Kamil Kawa(BR)": 9.0,
+        "Michał Siewniak": 7.8,
+        "Rafał Chrzanowski(BR)": 8.0,
+        "Adam Wisniewski": 5.5,
+        "Ryba": 6.4, //Ryba alias Krzysiek K.
+        "Andrzej Kruczyński(BR)": 8.2,
+        "Aleksander Osmałek": 4.2,
+        "Andrzej Doruchowski": 4.5,
+        "Adam Syrek": 6.9,
+        "Oliwier Sulima": 5.6,
+        "Michal Ce": 4.9,
+        "Tobiasz Fuczek": 6.6,
+        "Adam Piątek": 9.0,
+        "Mateusz Szyba": 7.9,
+        "Bartek Zdanowski": 8.8,
+        "Szymon Śleziona(BR)": 9.0,
+        "Marcin Szkup": 2.5,
+        "Daniel Tochwin": 8.2,
+        "Michał Urbanek": 3.8,
+        "Mateusz Ziober": 0.9,
+        "Marcin Ziober": 3.0,
+        "Maciek ERa": 6.9,
+        "Wiktor Ostolski": 7.8,
+        "Sławomir Jeleń": 3.6
     }
     if (niedzielneGranie) {
         stableRanking["Adam Piątek"] = stableRanking["Adam Piątek"] - 0.2
@@ -138,15 +151,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team2, team1);
     addIfGkToOtherTeam(playerToAdd2, team2, team1);
-    console.log("team1")
-    console.log(team1)
-    console.log("team2")
-    console.log(team2)
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
     addIfGkToOtherTeam(playerToAdd2, team1, team2);
-
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team2, team1);
@@ -154,6 +162,17 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
+    console.log("team1")
+    console.log(team1)
+    console.log("team2")
+    console.log(team2)
+    console.log("desiredQueue")
+    console.log(desiredQueue)
+    if(team1.length<6 && desiredQueue.length>0){
+        addIfGkToOtherTeam(desiredQueue.pop(), team1, team2);
+    }  else if(team2.length<6 && desiredQueue.length>0){
+        addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
+    }
     if (found.length > 12) {
         if(niedzielneGranie==true){
             addIfGkToOtherTeam(playerToAdd2, team2, team1);
@@ -218,7 +237,44 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     }
     document.getElementById('result').innerHTML = finalAssign
 
+    function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
+        if (player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))) {
+            team2.push(player)
+        } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Maciejewski')))) {
+            team2.splice(0, 1)
+            team1.push("Paweł Maciejewski")
+            team2.push(player)
+            team1.push(keysIterator.next().value)
+            team1.push(keysIterator.next().value)
+        } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba'))) {
+            team2.push(player);
+            team1.push(keysIterator.next().value)
+            team1.push(keysIterator.next().value)
+        } else if (player.includes("Dawid Will") && (team1.some(element => element.includes('Paweł Maciejewski')))) {
+            team2.push(player);
+            team1.push(keysIterator.next().value)
+            team1.push(keysIterator.next().value)
+        }
+    }
+
+    function checkIfTeamGot3DefensiveCapable( team1) {
+            let team1Defenders = team1.filter(element => defenceRanking[element]>6.0)
+            // let team2Defenders = team2.filter(element => defenceRanking[element]>6.0)
+            if(team1Defenders.length>=3){
+                return true
+            }else{
+                return false
+            }
+            // if(team2Defenders.length>=3){
+            //     return true
+            // }
+    }
+    
     function addIfGkToOtherTeam(player, team1, team2) {
+        if(desiredQueue.length>0){
+            desiredQueue.push(player)
+            player=desiredQueue.pop()
+        }
         if (player == undefined) {
             return
         }
@@ -232,28 +288,37 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
                 team1.push(player)
             }
         } else {
-            if (player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))) {
-                team2.push(player)
-            } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba')) && (team2.some(element => element.includes('Paweł Maciejewski')))) {
-                team2.splice(0, 1)
-                team1.push("Paweł Maciejewski")
-                team2.push(player)
-                team1.push(keysIterator.next().value)
-                team1.push(keysIterator.next().value)
-            } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba'))) {
-                team2.push(player);
-                team1.push(keysIterator.next().value)
-                team1.push(keysIterator.next().value)
-            } else if (player.includes("Dawid Will") && (team1.some(element => element.includes('Paweł Maciejewski')))) {
-                team2.push(player);
-                team1.push(keysIterator.next().value)
-                team1.push(keysIterator.next().value)
+            let davidSwitch = true
+            if (davidSwitch && (player.includes("Dawid Will") || player.includes("Paweł Maciejewski"))) {
+                checkIfPlayerIsAvoidedByDavid(player, team1, team2)
             } else {
                 if (team1.length >= 7) {
                     team2.push(player)
-                } else{
-                console.log("GK Not found")
-                team1.push(player)
+                } else {
+                    console.log("GK Not found")
+                    if (defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
+                        team1.push(player)
+                        console.log("Player can play defence"+player)
+                        // let defCheck = defenceRanking[player]>parseFloat(5.9)
+                        // console.log("defenceRanking[player]>5.9 "+defCheck)
+                        console.log("team1 defNo "+checkIfTeamGot3DefensiveCapable(team1))
+                    } else {
+                        desiredQueue.push(player)
+                        player = keysIterator.next().value
+                        if (defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
+                            team1.push(player)
+                        } else {
+                            desiredQueue.push(player)
+                            player = keysIterator.next().value
+                            if (defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
+                                team1.push(player)
+                            } else {
+                                if(player!=undefined){
+                                    desiredQueue.push(player) 
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
