@@ -111,7 +111,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Adam Piątek": 9.0,
         "Mateusz Szyba": 7.9,
         "Bartek Zdanowski": 8.8,
-        "Szymon Śleziona(BR)": 9.0,
+        "Szymon Śleziona(BR)": 8.6,
         "Marcin Szkup": 2.5,
         "Daniel Tochwin": 8.2,
         "Michał Urbanek": 3.8,
