@@ -53,10 +53,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Dawid Will": 8.0,
         "Daniel Toporczyk": 7.5,
         "Bogumił Gr": 7.0,
-        "Illia Leo Ti Lish": 1.2,
+        "Illia Leo Ti Lish": 2.2,
         "Paweł Maciejewski": 8.6,
-        "Roma Samkovskiy": 5.3,
-        "Yura Savchuk": 6.6,
+        "Roma Samkovskiy": 6.6,
+        "Yura Savchuk": 6.3,
         "Marek Ziober": 4.8,
         "Kamil Kawa": 3.9,
         "Kamil Kawa(BR)": 6.0,
@@ -75,7 +75,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Mateusz Szyba": 8.7,
         "Bartek Zdanowski": 8.8,
         "Szymon Śleziona(BR)": 5.3,
-        "Marcin Szkup": 3.5,
+        "Marcin Szkup": 3.7,
         "Daniel Tochwin": 8.2,
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
@@ -90,18 +90,18 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Dawid Will": 8.5,
         "Daniel Toporczyk": 8.5,
         "Bogumił Gr": 8.9,
-        "Illia Leo Ti Lish": 0.7,
+        "Illia Leo Ti Lish": 2.7,
         "Paweł Maciejewski": 5.3,
-        "Roma Samkovskiy": 6.3,
+        "Roma Samkovskiy": 6.6,
         "Yura Savchuk": 3.7,
         "Marek Ziober": 3.8,
         "Kamil Kawa": 5.9,
         "Kamil Kawa(BR)": 9.0,
         "Michał Siewniak": 7.8,
-        "Rafał Chrzanowski(BR)": 8.0,
+        "Rafał Chrzanowski(BR)": 6.0,
         "Adam Wisniewski": 5.5,
         "Ryba": 6.4, //Ryba alias Krzysiek K.
-        "Andrzej Kruczyński(BR)": 8.2,
+        "Andrzej Kruczyński(BR)": 6.2,
         "Aleksander Osmałek": 4.2,
         "Andrzej Doruchowski": 4.5,
         "Adam Syrek": 6.9,
@@ -111,7 +111,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Adam Piątek": 9.0,
         "Mateusz Szyba": 7.9,
         "Bartek Zdanowski": 8.8,
-        "Szymon Śleziona(BR)": 8.6,
+        "Szymon Śleziona(BR)": 7.6,
         "Marcin Szkup": 2.5,
         "Daniel Tochwin": 8.2,
         "Michał Urbanek": 3.8,
@@ -292,21 +292,17 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
                     team2.push(player)
                 } else {
                     console.log("GK Not found")
-                    if (defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
+                    if (playersWithRating[player] > 6.0 || defenceRanking[player] > parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
                         team1.push(player)
-                        console.log("Player can play defence"+player)
-                        // let defCheck = defenceRanking[player]>parseFloat(5.9)
-                        // console.log("defenceRanking[player]>5.9 "+defCheck)
-                        console.log("team1 defNo "+checkIfTeamGot3DefensiveCapable(team1))
-                    } else {
+                        } else {
                         desiredQueue.push(player)
                         player = keysIterator.next().value
-                        if (defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
+                        if (playersWithRating[player] > 6.0 || defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
                             team1.push(player)
                         } else {
                             desiredQueue.push(player)
                             player = keysIterator.next().value
-                            if (defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
+                            if (playersWithRating[player] > 6.0 || defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
                                 team1.push(player)
                             } else {
                                 if(player!=undefined){
