@@ -176,8 +176,7 @@ function cleanResults(data, niedzielneGranie, locator = 'xzsf02u">') {
     //     }
     // }
 
-    let finalAssign = "Team 1    Team 2"
-    console.log("Team 1    Team 2")
+    let finalAssign = ""
     for (let index = 0; index < found.length; index++) {
         finalAssign = finalAssign + '<br></br>'
         console.log('\n')
