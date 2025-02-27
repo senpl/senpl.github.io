@@ -77,10 +77,10 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Szymon Śleziona(BR)": 5.3,
         "Marcin Szkup": 3.7,
         "Daniel Tochwin": 8.2,
-        "Michał Urbanek": 3.8,
+        "Michał Urbanek": 3.5,
         "Mateusz Ziober": 2.9,
         "Marcin Ziober": 3.0,
-        "Maciek ERa": 5.9,
+        "Maciek ERa": 6.2,
         "Wiktor Ostolski": 6.8,
         "Sławomir Jeleń": 2.6
     }
@@ -174,16 +174,16 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
     }
     if (found.length > 12) {
-        if(niedzielneGranie==true){
+        if (niedzielneGranie == true) {
             addIfGkToOtherTeam(playerToAdd2, team2, team1);
-            playerToAdd = keysIterator.next().value;        
-        }else{
+            playerToAdd = keysIterator.next().value;
+        } else {
             addIfGkToOtherTeam(playerToAdd2, team1, team2);
             playerToAdd = keysIterator.next().value;
         }
     }
     if (found.length > 13) {
-        if(niedzielneGranie==true){
+        if(niedzielneGranie == true){
             addIfGkToOtherTeam(playerToAdd2, team1, team2);
             playerToAdd = keysIterator.next().value;        
         }else{
@@ -259,7 +259,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
 
     function checkIfTeamGot3DefensiveCapable( team1) {
             let team1Defenders = team1.filter(element => defenceRanking[element]>6.0)
-            if(team1Defenders.length>=3){
+        if (team1Defenders.length >= 3) {
                 return true
             }else{
                 return false
@@ -267,9 +267,9 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     }
     
     function addIfGkToOtherTeam(player, team1, team2) {
-        if(desiredQueue.length>0){
+        if (desiredQueue.length > 0) {
             desiredQueue.push(player)
-            player=desiredQueue.pop()
+            player = desiredQueue.pop()
         }
         if (player == undefined) {
             return
