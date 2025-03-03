@@ -1,31 +1,5 @@
 let testString = `
-Bartek Pryszcz /
-
-Paweł Maciejew /
-
-Dawid Will /
-
-Andrzej Ru /
-
-Roma Samkovskiy /
-
-Yura Savchuk /
-
-Marek Ziober /
-
-Kamil Kawa(BR) /
-
-Michał Siewniak /
-
-Rafał Chrzanowski /
-
-Adam Wisniewski /
-
-Szymon Śleziona(BR) /
-
-Oliwier Sulima /
-
-Adam Piątek`
+Bartek Pryszcz /  Paweł Maciejew /  Dawid Will /  Andrzej Ru /  Roma Samkovskiy /  Yura Savchuk /  Marek Ziober /  Kamil Kawa(BR) /  Michał Siewniak /  Rafał Chrzanowski /  Adam Wisniewski /  Szymon Śleziona(BR) /  Oliwier Sulima /  Adam Piątek`
 // calculateSquads(testString, false,false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
@@ -64,14 +38,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
         found = replaceStringsStartingWith(found, "Maciek ERa", "Maciek ERa")
     }
     console.log(found)
-    let desiredQueue = []
     let stableRanking = {
         "Andrzej Rukojć": 5.0,
         "Bartek Pryszcz": 6.7,
         "Dawid Will": 8.0,
         "Daniel Toporczyk": 7.5,
         "Bogumił Gr": 7.0,
-        "Illia Leo Ti Lish": 2.6,
+        "Illia Leo Ti Lish": 3.6,
         "Paweł Maciejewski": 8.6,
         "Roma Samkovskiy": 6.6,
         "Yura Savchuk": 6.3,
@@ -182,25 +155,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     playerToAdd = keysIterator.next().value;
     playerToAdd2 = keysIterator.next().value;
     addIfGkToOtherTeam(playerToAdd, team1, team2);
-    console.log("team1")
-    console.log(team1)
-    console.log("team2")
-    console.log(team2)
-    console.log("desiredQueue")
-    console.log(desiredQueue)
-    if(team1.length<6 && desiredQueue.length>0){
-        addIfGkToOtherTeam(desiredQueue.pop(), team1, team2);
-    }  else if(team2.length<6 && desiredQueue.length>0){
-        addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
-    } else if(desiredQueue.length>0){
-        addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
-        if(desiredQueue.length>0){
-            addIfGkToOtherTeam(desiredQueue.pop(), team1, team2);
-            if(desiredQueue.length>0){
-                addIfGkToOtherTeam(desiredQueue.pop(), team2, team2);
-            }
-        }
-    }
     if (found.length > 12) {
         if (niedzielneGranie == true) {
             addIfGkToOtherTeam(playerToAdd2, team2, team1);
@@ -211,12 +165,21 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
         }
     }
     if (found.length > 13) {
-        if(niedzielneGranie == true){
-            addIfGkToOtherTeam(playerToAdd2, team1, team2);
-            playerToAdd = keysIterator.next().value;        
-        }else{
-            addIfGkToOtherTeam(playerToAdd, team2, team1);
+        if(team1.length<7){
+            team1.push(playerToAdd)
+        } else {
+            team2.push(playerToAdd)
         }
+    }
+    console.log("team1f")
+    console.log(team1)
+    console.log("team2f")
+    console.log(team2)
+    if(checkIfTeamGot3DefensiveCapable(team1)==false){
+        team1.push("Not enough defenders")
+    }
+    if(checkIfTeamGot3DefensiveCapable(team2)==false){
+        team2.push("Not enough defenders")
     }
     if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
         let { team1: team1swap, team2: team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
@@ -252,19 +215,68 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     }
     team1 = team1.filter(element => element);
     team2 = team2.filter(element => element);
-    let finalAssign = "Team 1    Team 2"
-    console.log("Team 1    Team 2")
-    for (let index = 0; index < 8; index++) {
-        finalAssign = finalAssign + '<br></br>'
-        console.log('\n')
+    let team1WithRating = team1.map(element => [element, stableRanking[element]])
+    let team2WithRating = team2.map(element => [element, stableRanking[element]])
+    let team3=[], team4=[], team5=[], team6=[]
+    for(let i=0;i<team1WithRating.length;i++){
+        if(team1WithRating[i][1]-team2WithRating[i][1]<0.2){
+            team4.push(team1WithRating[i][0])
+            team3.push(team2WithRating[i][0])
+            if(i>4) {
+                team6.push(team1WithRating[i][0]);
+                team5.push(team2WithRating[i][0]);
+            }else{
+                team5.push(team1WithRating[i][0]);
+                team6.push(team2WithRating[i][0]);
+            }
+        }else{
+            team3.push(team1WithRating[i][0])
+            team4.push(team2WithRating[i][0])
+            team5.push(team1WithRating[i][0])
+            team6.push(team2WithRating[i][0])
+        }
+    }
+    let finalAssign = "Team 1    Team 2     (Vote Icon Heart)"
+    // console.log("Team 1    Team 2")
+    for (let index = 0; index < 7; index++) {
+        finalAssign = finalAssign + '<p></p>'
+        // console.log('\n')
         finalAssign = finalAssign + team1[index] + ' / ' + team2[index]
 
-        console.log(team1[index])
-        console.log(' / ')
-        console.log(team2[index])
+        // console.log("t1+ "+team1[index])
+        // console.log(' / ')
+        // console.log("t2+ "+team2[index])
+        // console.log("finalAssign " + finalAssign)
+    }
+    let finalAssign3 = "Team 1    Team 2     (Vote Icon Trzymaj Się)"
+    for (let index = 0; index < 7; index++) {
+        finalAssign3 = finalAssign3 + '<p></p>'
+        // console.log('\n')
+        finalAssign3 = finalAssign3 + team3[index] + ' / ' + team4[index]
+        // console.log("finalAssign3 " + finalAssign3)
+    }
+    let finalAssign4 = "Team 1    Team 2     (Vote Icon Ha Ha)"
+    for (let index = 0; index < 7; index++) {
+        finalAssign4 = finalAssign4 + '<p></p>'
+        // console.log('\n')
+        finalAssign4 = finalAssign4 + team5[index] + ' / ' + team6[index]
+
+        // console.log("finalAssign4 " + finalAssign4)
     }
     if(showInBrowser){
-        document.getElementById('result').innerHTML = finalAssign
+        let finalAssign2 = "Team 1    Team 2     (Vote Icon Wow)"
+        for (let index = 0; index < 7; index++) {
+            finalAssign2 = finalAssign2 + '<p></p>'
+            // console.log('\n')
+            if(index == 5){
+                finalAssign2 = finalAssign2 + team2[index] + ' / ' + team1[index]
+            }else{
+                finalAssign2 = finalAssign2 + team1[index] + ' / ' + team2[index]
+            }
+        }
+        
+        document.getElementById('result').innerHTML = finalAssign + "<br></br><br></br>" + finalAssign2
+        + "<br></br><br></br>" + finalAssign3 + "<br></br><br></br>" + finalAssign4
     }
 
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
@@ -297,18 +309,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     }
     
     function addIfGkToOtherTeam(player, team1, team2) {
-        if (desiredQueue.length > 0) {
-            if(player == undefined){
-                player = desiredQueue.pop();
-            } else {
-                let tempPlayer = player + "";
-                player = desiredQueue.pop();
-                desiredQueue.push(tempPlayer);
-                console.log("Player from desiredQueue: " + player);
-                console.log("q1: " + desiredQueue);
-            }
-        }
-        else if (player == undefined) {
+        if (player == undefined) {
             return;
         }
         const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
@@ -329,29 +330,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
                     team2.push(player)
                 } else {
                     console.log("GK Not found")
-                    if (playersWithRating[player] > 6.0 || defenceRanking[player] > parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
-                        team1.push(player)
-                        } else {
-                        desiredQueue.push(player)
-                        player = keysIterator.next().value
-                        if (playersWithRating[player] > 6.0 || defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
-                            team1.push(player)
-                        } else {
-                            desiredQueue.push(player)
-                            player = keysIterator.next().value
-                            if (playersWithRating[player] > 6.0 || defenceRanking[player]>parseFloat(5.9) || checkIfTeamGot3DefensiveCapable(team1)) {
-                                team1.push(player)
-                            } else {
-                                if(player!=undefined){
-                                    desiredQueue.push(player) 
-                                }
-                                if(desiredQueue.length>0){
-                                    player = desiredQueue.pop()
-                                    team1.push(player)
-                                }
-                            }
-                        }
-                    }
+                    team1.push(player)
                 }
             }
         }
