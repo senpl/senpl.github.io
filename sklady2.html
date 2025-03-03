@@ -10,14 +10,13 @@
 
 <body>
     <p>
-    <!-- locator before names <input id="locatorToSearch" value='xzsf02u">'/> -->
     <!-- known goalkeepers <input id="knownGoalkeepers" value='Andrzej Kruczyński, Szymon Śleziona, Kamil Kawa, Rafał Chrzanowski'/> -->
     <p>Data from source site </p>
     <input id="playersNames" style="height: 300;" />
     <button onclick="getStored(getElementById('playersNames'),'playersNames')" >GetStored</button>
-    <button onclick="storeInBrowser('playersNames' ,getElementById('playersNames').value,getElementById('playersNames'));getStored(getElementById('playersNames'),'playersNames')">Store in browser</button>
-    <button onclick="calculateSquads(getElementById('playersNames').value, false, getElementById('locatorToSearch').value)">Granie Środowe</button>
-    <button onclick="calculateSquads(getElementById('playersNames').value, true, getElementById('locatorToSearch').value)">Granie Niedzielne</button>
+    <button onclick="storeInBrowser('playersNames' ,getElementById('playersNames').value);getStored(getElementById('playersNames'),'playersNames')">Store in browser</button>
+    <button onclick="calculateSquads(getElementById('playersNames').value, false)">Granie Środowe</button>
+    <button onclick="calculateSquads(getElementById('playersNames').value, true)">Granie Niedzielne</button>
     <p id="result"></p>
 </body>
 

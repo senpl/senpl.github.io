@@ -1,23 +1,38 @@
 let testString = `
- Michał Urbanek /  Bartek Prys /  Bartek Zdanows /  Paweł Maciejewsk /  Dawid Willan> /  Roma Samkovskiy /  Andrzej Doruchowski /  Kamil Kawa(BR) /  Adam Wisniewski /  Szymon Śleziona(BR) /  Marcin Szkup /  Adam Piątek`
+Bartek Pryszcz /
 
-// calculateSquads(testString, false)
+Paweł Maciejew /
 
-function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
+Dawid Will /
+
+Andrzej Ru /
+
+Roma Samkovskiy /
+
+Yura Savchuk /
+
+Marek Ziober /
+
+Kamil Kawa(BR) /
+
+Michał Siewniak /
+
+Rafał Chrzanowski /
+
+Adam Wisniewski /
+
+Szymon Śleziona(BR) /
+
+Oliwier Sulima /
+
+Adam Piątek`
+// calculateSquads(testString, false,false)
+
+function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     console.log(data)
     let found = data.split('/')
     found = found.map(el => el.trim())
     console.log(found)
-    found = found.filter((el) => !el.includes("Znajomi") && !el.includes("Inni"))
-    let knownGoalkeepers = ["Andrzej Kruczyński", "Szymon Śleziona", "Kamil Kawa", "Rafał Chrzanowski"]
-    for (let index = 0; index < found.length; index++) {
-        if (found[index].includes('<')) {
-            found[index] = found[index].substring(0, found[index].length - 1)
-        }
-        if (knownGoalkeepers.includes(found[index])) {
-            found[index] = found[index] + "(BR)"
-        }
-    }
     //replace shorcut with full names
     function replaceStringsStartingWith(array, prefix, newValue) {
         return array.map(item =>
@@ -42,6 +57,9 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
     if (found.filter(element => element.startsWith("Kwa Kwa"))) {
         found = replaceStringsStartingWith(found, "Kwa Kwa", "Ryba")
     }
+    if (found.filter(element => element.startsWith("Andrzej Ru"))) {
+        found = replaceStringsStartingWith(found, "Andrzej Ru", "Andrzej Rukojć")
+    }
     if (found.filter(element => element.startsWith("Maciek ERa"))) {
         found = replaceStringsStartingWith(found, "Maciek ERa", "Maciek ERa")
     }
@@ -62,6 +80,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Kamil Kawa(BR)": 6.0,
         "Michał Siewniak": 5.8,
         "Rafał Chrzanowski(BR)": 3.5,
+        "Rafał Chrzanowski": 1.5,
         "Adam Wisniewski": 7.1,
         "Ryba": 7.7, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 3.7,
@@ -99,6 +118,7 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         "Kamil Kawa(BR)": 9.0,
         "Michał Siewniak": 7.8,
         "Rafał Chrzanowski(BR)": 6.0,
+        "Rafał Chrzanowski": 3.5,
         "Adam Wisniewski": 5.5,
         "Ryba": 6.9, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 6.2,
@@ -172,6 +192,14 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         addIfGkToOtherTeam(desiredQueue.pop(), team1, team2);
     }  else if(team2.length<6 && desiredQueue.length>0){
         addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
+    } else if(desiredQueue.length>0){
+        addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
+        if(desiredQueue.length>0){
+            addIfGkToOtherTeam(desiredQueue.pop(), team1, team2);
+            // if(desiredQueue.length>0){
+            //     addIfGkToOtherTeam(desiredQueue.pop(), team2, team2);
+            // }
+        }
     }
     if (found.length > 12) {
         if (niedzielneGranie == true) {
@@ -235,7 +263,9 @@ function calculateSquads(data, niedzielneGranie, locator = 'xzsf02u">') {
         console.log(' / ')
         console.log(team2[index])
     }
-    document.getElementById('result').innerHTML = finalAssign
+    if(showInBrowser){
+        document.getElementById('result').innerHTML = finalAssign
+    }
 
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
         if (player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))) {
