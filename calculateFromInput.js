@@ -196,9 +196,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
         addIfGkToOtherTeam(desiredQueue.pop(), team2, team1);
         if(desiredQueue.length>0){
             addIfGkToOtherTeam(desiredQueue.pop(), team1, team2);
-            // if(desiredQueue.length>0){
-            //     addIfGkToOtherTeam(desiredQueue.pop(), team2, team2);
-            // }
+            if(desiredQueue.length>0){
+                addIfGkToOtherTeam(desiredQueue.pop(), team2, team2);
+            }
         }
     }
     if (found.length > 12) {
@@ -298,11 +298,18 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     
     function addIfGkToOtherTeam(player, team1, team2) {
         if (desiredQueue.length > 0) {
-            desiredQueue.push(player)
-            player = desiredQueue.pop()
+            if(player == undefined){
+                player = desiredQueue.pop();
+            } else {
+                let tempPlayer = player + "";
+                player = desiredQueue.pop();
+                desiredQueue.push(tempPlayer);
+                console.log("Player from desiredQueue: " + player);
+                console.log("q1: " + desiredQueue);
+            }
         }
-        if (player == undefined) {
-            return
+        else if (player == undefined) {
+            return;
         }
         const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
         if (team1AlreadyGotBR) {
@@ -337,6 +344,10 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
                             } else {
                                 if(player!=undefined){
                                     desiredQueue.push(player) 
+                                }
+                                if(desiredQueue.length>0){
+                                    player = desiredQueue.pop()
+                                    team1.push(player)
                                 }
                             }
                         }
