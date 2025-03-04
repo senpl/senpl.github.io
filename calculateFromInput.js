@@ -237,10 +237,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
         }
     }
     let finalAssign = "Team 1    Team 2     (Vote Icon Heart)"
-    // console.log("Team 1    Team 2")
     for (let index = 0; index < 7; index++) {
         finalAssign = finalAssign + '<p></p>'
-        // console.log('\n')
         finalAssign = finalAssign + team1[index] + ' / ' + team2[index]
 
         // console.log("t1+ "+team1[index])
@@ -251,24 +249,18 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     let finalAssign3 = "Team 1    Team 2     (Vote Icon Trzymaj Się)"
     for (let index = 0; index < 7; index++) {
         finalAssign3 = finalAssign3 + '<p></p>'
-        // console.log('\n')
         finalAssign3 = finalAssign3 + team3[index] + ' / ' + team4[index]
-        // console.log("finalAssign3 " + finalAssign3)
     }
     let finalAssign4 = "Team 1    Team 2     (Vote Icon Ha Ha)"
     for (let index = 0; index < 7; index++) {
         finalAssign4 = finalAssign4 + '<p></p>'
-        // console.log('\n')
         finalAssign4 = finalAssign4 + team5[index] + ' / ' + team6[index]
-
-        // console.log("finalAssign4 " + finalAssign4)
     }
     if(showInBrowser){
         let finalAssign2 = "Team 1    Team 2     (Vote Icon Wow)"
         for (let index = 0; index < 7; index++) {
             finalAssign2 = finalAssign2 + '<p></p>'
-            // console.log('\n')
-            if(index == 5){
+            if(index == 5 || index == 6){
                 finalAssign2 = finalAssign2 + team2[index] + ' / ' + team1[index]
             }else{
                 finalAssign2 = finalAssign2 + team1[index] + ' / ' + team2[index]
