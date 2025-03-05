@@ -26,7 +26,7 @@ Mateusz Ziober /
 Szybki Mati /
 
 Adam Piątek`
- calculateSquads(testString, false,false)
+//  calculateSquads(testString, false,false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     console.log(data)
@@ -230,9 +230,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
             team1.push(team2[indexOfChange])
             team2.splice(indexOfChange,1)
         }
-        // team2.splice(team1[team1.indexOf(team1Defenders[team1Defenders.length-2])],1)
-        // team1 = team1.filter(element => element);
-        // team2 = team2.filter(element => element);
+        team1.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
+        team2.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
         console.log(team1)
         console.log(team2)
     }
