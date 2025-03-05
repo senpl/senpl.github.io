@@ -1,6 +1,32 @@
 let testString = `
-Bartek Pryszcz /  Paweł Maciejew /  Dawid Will /  Andrzej Ru /  Roma Samkovskiy /  Yura Savchuk /  Marek Ziober /  Kamil Kawa(BR) /  Michał Siewniak /  Rafał Chrzanowski /  Adam Wisniewski /  Szymon Śleziona(BR) /  Oliwier Sulima /  Adam Piątek`
-// calculateSquads(testString, false,false)
+Michał Urbanek /
+
+Bartek Prys /
+
+Paweł Maciejew /
+
+Bogumił Grzybowsk /
+
+Illia Leo Ti Lish /
+
+Yura Savchuk /
+
+Marek Ziober /
+
+Michał Siewniak /
+
+Tobiasz Fuczek /
+
+Szymon Śleziona(BR) /
+
+Marcin Szkup /
+
+Mateusz Ziober /
+
+Szybki Mati /
+
+Adam Piątek`
+ calculateSquads(testString, false,false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
     console.log(data)
@@ -179,7 +205,36 @@ function calculateSquads(data, niedzielneGranie, showInBrowser=true) {
         team1.push("Not enough defenders")
     }
     if(checkIfTeamGot3DefensiveCapable(team2)==false){
-        team2.push("Not enough defenders")
+        // team2.push("Not enough defenders")
+        //znajdz najwyższy def rating z danej drużyny
+        // i zamień go z ondrop. ratingiem drużyny przeciwnej
+        
+        let team1Defenders = team1.filter(element => defenceRanking[element]>6.0)
+        // console.log(team1Defenders.length)
+        let bestDefenderToTakeIndex=2
+        if(team1Defenders.length>4){
+            bestDefenderToTakeIndex=3
+        }
+        console.log(team1[team1.indexOf(team1Defenders[team1Defenders.length-bestDefenderToTakeIndex])])
+        let indexOfChange=team1.indexOf(team1Defenders[team1Defenders.length-bestDefenderToTakeIndex])
+        team2.push(team1[team1.indexOf(team1Defenders[team1Defenders.length-bestDefenderToTakeIndex])])
+        team1.splice(team1.indexOf(team1Defenders[team1Defenders.length-bestDefenderToTakeIndex]),1)
+        team1.push(team2[indexOfChange])
+        team2.splice(indexOfChange,1)
+        if(checkIfTeamGot3DefensiveCapable(team2)==false){
+            let team1Defenders = team1.filter(element => defenceRanking[element]>6.0)
+            console.log(team1[team1.indexOf(team1Defenders[team1Defenders.length-2])])
+            let indexOfChange=team1.indexOf(team1Defenders[team1Defenders.length-2])
+            team2.push(team1[team1.indexOf(team1Defenders[team1Defenders.length-2])])
+            team1.splice(team1.indexOf(team1Defenders[team1Defenders.length-2]),1)
+            team1.push(team2[indexOfChange])
+            team2.splice(indexOfChange,1)
+        }
+        // team2.splice(team1[team1.indexOf(team1Defenders[team1Defenders.length-2])],1)
+        // team1 = team1.filter(element => element);
+        // team2 = team2.filter(element => element);
+        console.log(team1)
+        console.log(team2)
     }
     if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
         let { team1: team1swap, team2: team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
