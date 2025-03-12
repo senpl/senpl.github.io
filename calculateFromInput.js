@@ -24,7 +24,7 @@ Adam Piątek /
 
 Aleksander Osmałek /
 Michał Urbanek `
-calculateSquads(testString, false, false)
+// calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
