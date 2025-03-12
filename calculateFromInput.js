@@ -14,7 +14,7 @@ Michał Siewniak /
 
 Rafał Chrzanowski(BR) /
 
-Szymon Śleziona(BR) /
+Szymon Śleziona /
 
 Mateusz Ziober /
 
@@ -23,8 +23,8 @@ Szybki Mati /
 Adam Piątek /
 
 Aleksander Osmałek /
-Inny `
-// calculateSquads(testString, false, false)
+Michał Urbanek `
+calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
@@ -104,7 +104,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Maciek ERa": 6.2,
         "Wiktor Ostolski": 6.8,
         "Sławomir Jeleń": 2.6,
-        "Not enough defenders": 1.0
     }
     let defenceRanking = {
         "Andrzej Rukojć": 5.8,
@@ -121,7 +120,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Kamil Kawa": 5.9,
         "Kamil Kawa(BR)": 9.0,
         "Michał Siewniak": 7.8,
-        "Rafał Chrzanowski(BR)": 6.0,
+        "Rafał Chrzanowski(BR)": 6.1,
         "Rafał Chrzanowski": 3.5,
         "Adam Wisniewski": 5.5,
         "Ryba": 6.9, //Ryba alias Krzysiek K.
@@ -320,7 +319,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             return { team1, team2 }
         } else if (team1.some(element => element.includes('(BR)')) && !team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(element => element.includes('(BR)'))
-            team1 = team1.filter(element => !element.includes('(BR)'))
+            team1 = team1.filter(element => !element.includes(gk1))
             let playerToTeam1 = team2.splice(5, 1);
             team1.push(playerToTeam1.toString());
             team2.push(gk1);
