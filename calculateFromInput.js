@@ -25,7 +25,7 @@ Adam Piątek /
 
 Aleksander Osmałek /
 Inny `
-calculateSquads(testString, false, false)
+// calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
@@ -76,8 +76,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Illia Leo Ti Lish": 3.6,
         "Inny": 5.0,
         "Paweł Maciejewski": 8.8,
-        "Roma Samkovskiy": 6.6,
-        "Yura Savchuk": 6.3,
+        "Roma Samkovskiy": 6.4,
+        "Yura Savchuk": 6.5,
         "Marek Ziober": 4.8,
         "Kamil Kawa": 3.9,
         "Kamil Kawa(BR)": 6.0,
@@ -87,7 +87,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Adam Wisniewski": 7.1,
         "Ryba": 7.7, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 3.7,
-        "Aleksander Osmałek": 4.2,
+        "Aleksander Osmałek": 4.0,
         "Andrzej Doruchowski": 5.5,
         "Adam Syrek": 7.9,
         "Oliwier Sulima": 3.6,
