@@ -3,9 +3,8 @@ Bartek Pryszcz /
 
 Paweł Maciejew /
 
-Dawid Wi(GK)) /
+Dawid Wi(BR)) /
 
-Roma Samk /
 
 Yura Savchuk /
 
@@ -15,7 +14,7 @@ Michał Siewniak /
 
 Rafał Chrzanowski(BR) /
 
-Szymon Śleziona(GK) /
+Szymon Śleziona(BR) /
 
 Mateusz Ziober /
 
@@ -151,9 +150,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         if (stableRanking[element] == undefined) {
             console.log("Nie znaleziono ratingu dla: ")
             console.log(found.filter(element => stableRanking[element] == undefined))
-            if(element.includes("GK")){
+            if (element.includes("GK")) {
                 stableRanking[element] = 4.1
-                defenceRanking[element] = 4.1
+                defenceRanking[element] = 6.1
             } else {
                 stableRanking[element] = 4.9
                 defenceRanking[element] = 4.9
@@ -232,12 +231,29 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         team2.splice(team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex]), 1)
         team2.push(team1[indexOfChange])
         team1.splice(indexOfChange, 1)
-        if(checkIfTeamGot3DefensiveCapable(team1) == false){   
-            throw new Error("Not enough defenders")
+        if (checkIfTeamGot3DefensiveCapable(team1) == false) {
+            let team2Defenders = team2.filter(element => defenceRanking[element] > 6.0)
+            let bestDefenderToTakeIndex = 2
+            if (team2Defenders.length > 4) {
+                bestDefenderToTakeIndex = 3
+            }
+            let indexOfChange = team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex])
+            team1.push(team2[team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex])])
+            team2.splice(team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex]), 1)
+            team2.push(team1[indexOfChange])
+            team1.splice(indexOfChange, 1)
+            if (checkIfTeamGot3DefensiveCapable(team1) == false) {
+                throw new Error("Not enough defenders")
+            }
+            // throw new Error("Not enough defenders")
         }
 
         team1.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
         team2.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
+        team1 = team1.filter(element => element != undefined)
+        team2 = team2.filter(element => element != undefined)
+        // console.log(team1)
+        // console.log(team2)
     }
     if (checkIfTeamGot3DefensiveCapable(team2) == false) {
         // team2.push("Not enough defenders")
@@ -278,13 +294,19 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         let { team1: team1swap, team2: team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
         team1 = team1swap;
         team2 = team2swap;
+        console.log("team1")
+        console.log(team1)
+        console.log("team2")
+        console.log(team2)
     }
     function swapGKsIfTeam2GotWeaker(team1, team2) {
         if (team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
-            let gk1 = team1.find(element => element.includes('(BR)'))
-            let gk2 = team2.find(element => element.includes('(BR)'))
-            team1 = team1.filter(element => !element.includes('(BR)'))
-            team2 = team2.filter(element => !element.includes('(BR)'))
+            let gk1 = team1.find(el => el.includes('(BR)'))
+            let gk2 = team2.find(el => el.includes('(BR)'))
+            console.log("gk1 " + gk1)
+            console.log("gk2 " + gk2)
+            team1 = team1.filter(element => element != gk1)
+            team2 = team2.filter(element => element != gk2)
             gk1Rating = stableRanking[gk1]
             gk2Rating = stableRanking[gk2]
             if (gk1Rating > gk2Rating) {
@@ -311,27 +333,31 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     team2 = team2.filter(element => element != undefined);
     console.log("team1ToCheck")
     console.log(team1)
+    console.log("team2ToCheck")
+    console.log(team2)
     let team1WithRating = team1.map(element => [element, stableRanking[element]])
     let team2WithRating = team2.map(element => [element, stableRanking[element]])
     let team3 = [], team4 = [], team5 = [], team6 = []
 
     for (let i = 0; i < team1WithRating.length; i++) {
-        if (team1WithRating[i][1] - team2WithRating[i][1] <= 0.2) {
-            // console.log("team1WithRating[i][1] " + team1WithRating[i] + " swapped for team2WithRating[i][1] " + team2WithRating[i])
-            team4.push(team1WithRating[i][0])
-            team3.push(team2WithRating[i][0])
-            if (i > 4) {
-                team6.push(team1WithRating[i][0]);
-                team5.push(team2WithRating[i][0]);
+        if (team1WithRating[i] != undefined && team2WithRating[i] != undefined) {
+            if (team1WithRating[i][1] - team2WithRating[i][1] <= 0.2) {
+                // console.log("team1WithRating[i][1] " + team1WithRating[i] + " swapped for team2WithRating[i][1] " + team2WithRating[i])
+                team4.push(team1WithRating[i][0])
+                team3.push(team2WithRating[i][0])
+                if (i > 4) {
+                    team6.push(team1WithRating[i][0]);
+                    team5.push(team2WithRating[i][0]);
+                } else {
+                    team5.push(team1WithRating[i][0]);
+                    team6.push(team2WithRating[i][0]);
+                }
             } else {
-                team5.push(team1WithRating[i][0]);
-                team6.push(team2WithRating[i][0]);
+                team3.push(team1WithRating[i][0])
+                team4.push(team2WithRating[i][0])
+                team5.push(team1WithRating[i][0])
+                team6.push(team2WithRating[i][0])
             }
-        } else {
-            team3.push(team1WithRating[i][0])
-            team4.push(team2WithRating[i][0])
-            team5.push(team1WithRating[i][0])
-            team6.push(team2WithRating[i][0])
         }
     }
     let finalAssign = "Team 1    Team 2     (Vote Icon Heart)"
