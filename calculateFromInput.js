@@ -25,7 +25,7 @@ Adam Piątek /
 
 Aleksander Osmałek /
 Inny `
-calculateSquads(testString, false, false)
+// calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
@@ -151,8 +151,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         if (stableRanking[element] == undefined) {
             console.log("Nie znaleziono ratingu dla: ")
             console.log(found.filter(element => stableRanking[element] == undefined))
-            stableRanking['"' + element + '"'] = 5.0
-            defenceRanking['"' + element + '"'] = 5.0
+            if(element.includes("GK")){
+                stableRanking[element] = 4.1
+                defenceRanking[element] = 4.1
+            } else {
+                stableRanking[element] = 4.9
+                defenceRanking[element] = 4.9
+            }
         }
     })
     if (niedzielneGranie) {
@@ -217,8 +222,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log("team2f")
     console.log(team2)
     if (checkIfTeamGot3DefensiveCapable(team1) == false) {
-        //team1.push("Not enough defenders")
-        // throw Error("Not enough defenders")
         let team2Defenders = team2.filter(element => defenceRanking[element] > 6.0)
         let bestDefenderToTakeIndex = 2
         if (team2Defenders.length > 4) {
@@ -235,9 +238,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
 
         team1.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
         team2.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
-        // console.log(team1)
-        // console.log(team2)
-        // throw new Error("Not enough defenders")
     }
     if (checkIfTeamGot3DefensiveCapable(team2) == false) {
         // team2.push("Not enough defenders")
@@ -316,8 +316,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     let team3 = [], team4 = [], team5 = [], team6 = []
 
     for (let i = 0; i < team1WithRating.length; i++) {
-        // console.log("team1WithRating[i][1] "+team1WithRating[i][1])
-        if (team1WithRating[i][1] - team2WithRating[i][1] < 0.2) {
+        if (team1WithRating[i][1] - team2WithRating[i][1] <= 0.2) {
+            // console.log("team1WithRating[i][1] " + team1WithRating[i] + " swapped for team2WithRating[i][1] " + team2WithRating[i])
             team4.push(team1WithRating[i][0])
             team3.push(team2WithRating[i][0])
             if (i > 4) {
