@@ -25,7 +25,7 @@ Adam Piątek /
 
 Aleksander Osmałek /
 Inny `
-// calculateSquads(testString, false, false)
+calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
@@ -104,7 +104,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Marcin Ziober": 3.0,
         "Maciek ERa": 6.2,
         "Wiktor Ostolski": 6.8,
-        "Sławomir Jeleń": 2.6
+        "Sławomir Jeleń": 2.6,
+        "Not enough defenders": 1.0
     }
     let defenceRanking = {
         "Andrzej Rukojć": 5.8,
@@ -216,7 +217,27 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log("team2f")
     console.log(team2)
     if (checkIfTeamGot3DefensiveCapable(team1) == false) {
-        team1.push("Not enough defenders")
+        //team1.push("Not enough defenders")
+        // throw Error("Not enough defenders")
+        let team2Defenders = team2.filter(element => defenceRanking[element] > 6.0)
+        let bestDefenderToTakeIndex = 2
+        if (team2Defenders.length > 4) {
+            bestDefenderToTakeIndex = 3
+        }
+        let indexOfChange = team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex])
+        team1.push(team2[team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex])])
+        team2.splice(team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex]), 1)
+        team2.push(team1[indexOfChange])
+        team1.splice(indexOfChange, 1)
+        if(checkIfTeamGot3DefensiveCapable(team1) == false){   
+            throw new Error("Not enough defenders")
+        }
+
+        team1.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
+        team2.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
+        // console.log(team1)
+        // console.log(team2)
+        // throw new Error("Not enough defenders")
     }
     if (checkIfTeamGot3DefensiveCapable(team2) == false) {
         // team2.push("Not enough defenders")
@@ -288,6 +309,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     }
     team1 = team1.filter(element => element != undefined);
     team2 = team2.filter(element => element != undefined);
+    console.log("team1ToCheck")
+    console.log(team1)
     let team1WithRating = team1.map(element => [element, stableRanking[element]])
     let team2WithRating = team2.map(element => [element, stableRanking[element]])
     let team3 = [], team4 = [], team5 = [], team6 = []
