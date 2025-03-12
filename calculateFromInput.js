@@ -358,6 +358,14 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
                 team6.push(team2WithRating[i][0])
             }
         }
+        if(team1WithRating[i] != undefined && team2WithRating[i] == undefined){
+            team3.push(team1WithRating[i][0])
+            team5.push(team1WithRating[i][0])
+        }
+        if(team1WithRating[i] == undefined && team2WithRating[i] != undefined){
+            team4.push(team2WithRating[i][0])
+            team6.push(team2WithRating[i][0])
+        }
     }
     let finalAssign = "Team 1    Team 2     (Vote Icon Heart)"
     for (let index = 0; index < 7; index++) {
