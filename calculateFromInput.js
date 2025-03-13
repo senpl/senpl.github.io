@@ -84,17 +84,18 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Rafał Chrzanowski(BR)": 3.5,
         "Rafał Chrzanowski": 1.5,
         "Adam Wisniewski": 7.1,
-        "Ryba": 7.7, //Ryba alias Krzysiek K.
+        "Ryba": 7.6, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 3.7,
         "Aleksander Osmałek": 4.0,
         "Andrzej Doruchowski": 5.5,
         "Adam Syrek": 7.9,
         "Oliwier Sulima": 3.6,
         "Michal Ce": 4.9,
-        "Tobiasz Fuczek": 7.8,
-        "Adam Piątek": 7.6,
-        "Szybki Mati": 8.6,
+        "Tobiasz Fuczek": 7.7,
+        "Adam Piątek": 7.8,
+        "Szybki Mati": 9.0,
         "Bartek Zdanowski": 8.8,
+        "Szymon Śleziona": 6.8,
         "Szymon Śleziona(BR)": 5.3,
         "Marcin Szkup": 3.7,
         "Daniel Tochwin": 8.2,
@@ -134,6 +135,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Adam Piątek": 9.0,
         "Szybki Mati": 7.9,
         "Bartek Zdanowski": 8.8,
+        "Szymon Śleziona": 7.6,
         "Szymon Śleziona(BR)": 7.6,
         "Marcin Szkup": 2.5,
         "Daniel Tochwin": 8.2,
@@ -150,7 +152,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             console.log("Nie znaleziono ratingu dla: ")
             console.log(found.filter(element => stableRanking[element] == undefined))
             if (element.includes("GK")) {
-                stableRanking[element] = 4.1
+                stableRanking[element] = 3.2
                 defenceRanking[element] = 6.1
             } else {
                 stableRanking[element] = 4.9
@@ -244,7 +246,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             if (checkIfTeamGot3DefensiveCapable(team1) == false) {
                 throw new Error("Not enough defenders")
             }
-            // throw new Error("Not enough defenders")
         }
 
         team1.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
@@ -359,8 +360,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             }
         }
         if(team1WithRating[i] != undefined && team2WithRating[i] == undefined){
-            team3.push(team1WithRating[i][0])
-            team5.push(team1WithRating[i][0])
+            if( team1.length >= 6 && niedzielneGranie == false){
+                team4.push(team1WithRating[i][0])
+                team6.push(team1WithRating[i][0])
+            } else {
+                team3.push(team1WithRating[i][0])
+                team5.push(team1WithRating[i][0])
+            }
         }
         if(team1WithRating[i] == undefined && team2WithRating[i] != undefined){
             team4.push(team2WithRating[i][0])
