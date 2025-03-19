@@ -1,30 +1,6 @@
 let testString = `
-Bartek Pryszcz /
-
-Paweł Maciejew /
-
-Dawid Wi(BR)) /
-
-
-Yura Savchuk /
-
-Kamil Kawa(BR) /
-
-Michał Siewniak /
-
-Rafał Chrzanowski(BR) /
-
-Szymon Śleziona /
-
-Mateusz Ziober /
-
-Szybki Mati /
-
-Adam Piątek /
-
-Aleksander Osmałek /
-Michał Urbanek `
-// calculateSquads(testString, false, false)
+Michał Urbanek /  Paweł Macie /  Dawid Wi(BR) /  Maciek ER /  Kwa Kwa /  Tobiasz Fuczek /  Rafał Chrzanowski /  Szymon Śleziona(BR) /  Marcin Szkup /  Szybki Mati /  Adam Piątek /  Aleksander Osmałek`
+calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
@@ -222,7 +198,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log("team2f")
     console.log(team2)
     if (checkIfTeamGot3DefensiveCapable(team1) == false) {
-        let team2Defenders = team2.filter(element => defenceRanking[element] > 6.0)
+        let team2Defenders = team2.filter(element => (defenceRanking[element] > 6.0&&!element.includes("(BR)")))
         let bestDefenderToTakeIndex = 2
         if (team2Defenders.length > 4) {
             bestDefenderToTakeIndex = 3
@@ -233,7 +209,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         team2.push(team1[indexOfChange])
         team1.splice(indexOfChange, 1)
         if (checkIfTeamGot3DefensiveCapable(team1) == false) {
-            let team2Defenders = team2.filter(element => defenceRanking[element] > 6.0)
+            let team2Defenders = team2.filter(element => (defenceRanking[element] > 6.0 &&!element.includes("(BR)")))    
             let bestDefenderToTakeIndex = 2
             if (team2Defenders.length > 4) {
                 bestDefenderToTakeIndex = 3
@@ -260,7 +236,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         //znajdz najwyższy def rating z danej drużyny
         // i zamień go z ondrop. ratingiem drużyny przeciwnej
 
-        let team1Defenders = team1.filter(element => defenceRanking[element] > 6.0)
+        let team1Defenders = team1.filter(element => (defenceRanking[element] > 6.0&&!element.includes("(BR)")))
         // console.log(team1Defenders.length)
         let bestDefenderToTakeIndex = 2
         if (team1Defenders.length > 4) {
@@ -273,7 +249,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         team1.push(team2[indexOfChange])
         team2.splice(indexOfChange, 1)
         if (checkIfTeamGot3DefensiveCapable(team2) == false) {
-            let team1Defenders = team1.filter(element => defenceRanking[element] > 6.0)
+            let team1Defenders = team1.filter(element => (defenceRanking[element] > 6.0&&!element.includes("(BR)")))
             console.log(team1[team1.indexOf(team1Defenders[team1Defenders.length - 2])])
             let indexOfChange = team1.indexOf(team1Defenders[team1Defenders.length - 2])
             team2.push(team1[team1.indexOf(team1Defenders[team1Defenders.length - 2])])
@@ -341,7 +317,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
 
     for (let i = 0; i < team1WithRating.length; i++) {
         if (team1WithRating[i] != undefined && team2WithRating[i] != undefined) {
-            if (team1WithRating[i][1] - team2WithRating[i][1] <= 0.2) {
+            if (team1WithRating[i][1] - team2WithRating[i][1] <= 0.2 && !team1WithRating[i][0].includes("(BR)") &&!team2WithRating[i][0].includes("(BR)")) {
                 // console.log("team1WithRating[i][1] " + team1WithRating[i] + " swapped for team2WithRating[i][1] " + team2WithRating[i])
                 team4.push(team1WithRating[i][0])
                 team3.push(team2WithRating[i][0])
@@ -445,7 +421,21 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             return;
         }
         const team1AlreadyGotBR = team1.some(element => element.includes('(BR)'));
+        const team2AlreadyGotBR = team2.some(element => element.includes('(BR)'));
         if (team1AlreadyGotBR) {
+            if (player.includes(('(BR)'))) {
+                console.log("GK FOUND ")
+                console.log("GK "+player)
+                if(team2AlreadyGotBR){
+                    team1.push(player)
+                } else {
+                    team1.push(team2.pop())
+                    team2.push(player)
+                }
+            } else {
+                team1.push(player)
+            }
+        } else if (team2AlreadyGotBR) {
             if (player.includes(('(BR)'))) {
                 console.log("GK FOUND ")
                 team1.push(team2.pop())
