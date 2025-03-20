@@ -379,10 +379,10 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
                 finalAssign2 = finalAssign2 + team1[index] + ' / ' + team2[index]
             }
         }
-        finalAssign=finalAssign.replace("undefined", "")
-        finalAssign2=finalAssign2.replace("undefined", "")
-        finalAssign3=finalAssign3.replace("undefined", "")
-        finalAssign4=finalAssign4.replace("undefined", "")
+        finalAssign=finalAssign.replaceAll("undefined", "")
+        finalAssign2=finalAssign2.replaceAll("undefined", "")
+        finalAssign3=finalAssign3.replaceAll("undefined", "")
+        finalAssign4=finalAssign4.replaceAll("undefined", "")
         document.getElementById('result').innerHTML = finalAssign + "<br></br><br></br>" + finalAssign2
             + "<br></br><br></br>" + finalAssign3 + "<br></br><br></br>" + finalAssign4
     }
