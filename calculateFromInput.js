@@ -1,5 +1,5 @@
 let testString = `
-Michał Urbanek /  Paweł Macie /  Dawid Wi(BR) /  Maciek ER /  Kwa Kwa /  Tobiasz Fuczek /  Rafał Chrzanowski /  Szymon Śleziona /  Marcin Szkup /  Szybki Mati /  Tomasz Baraniec(BR) / Kimich / Kane / Aleksander Osmałek`
+Michał Urbanek /  Paweł Macie /  Dawid Wi(BR) /  Maciek ER /  Kwa Kwa /  Tobiasz Fuczek /  Rafał Chrzanowski /  Szymon Śleziona /  Marcin Szkup /  Szybki Mati /  Tomasz Baraniec(BR) / Aleksander Osmałek`
 // calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
@@ -383,6 +383,11 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         finalAssign2=finalAssign2.replaceAll("undefined", "")
         finalAssign3=finalAssign3.replaceAll("undefined", "")
         finalAssign4=finalAssign4.replaceAll("undefined", "")
+        finalAssign=finalAssign.replace("<p></p> / ", "")
+        finalAssign2=finalAssign2.replace("<p></p> / ", "")
+        finalAssign3=finalAssign3.replace("<p></p> / ", "")
+        finalAssign4=finalAssign4.replace("<p></p> / ", "")
+
         document.getElementById('result').innerHTML = finalAssign + "<br></br><br></br>" + finalAssign2
             + "<br></br><br></br>" + finalAssign3 + "<br></br><br></br>" + finalAssign4
     }
