@@ -44,7 +44,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(found)
     let stableRanking = {
         "Szybki Mati": 9.0,
-        "Bartek Zdanowski": 8.8,
+        "Bartek Zdanowski": 8.5,
         "Paweł Maciejewski": 8.7,
         "Dawid Will": 8.0,
         "Adam Syrek": 7.9,
@@ -60,8 +60,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Inny": 5.0,
         "Yura Savchuk": 6.5,
         "Michał Siewniak": 6.4,
-        "Roma Samkovskiy": 6.3,
-        "Maciek ERa": 6.2,
+        "Maciek ERa": 6.3,
+        "Roma Samkovskiy": 6.2,
         "Kamil Kawa(BR)": 6.0,
         "Andrzej Rukojć": 5.6,
         "Andrzej Doruchowski": 5.5,
