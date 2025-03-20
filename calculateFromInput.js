@@ -1,6 +1,6 @@
 let testString = `
-Michał Urbanek /  Paweł Macie /  Dawid Wi(BR) /  Maciek ER /  Kwa Kwa /  Tobiasz Fuczek /  Rafał Chrzanowski /  Szymon Śleziona(BR) /  Marcin Szkup /  Szybki Mati /  Adam Piątek /  Aleksander Osmałek`
-calculateSquads(testString, false, false)
+Michał Urbanek /  Paweł Macie /  Dawid Wi(BR) /  Maciek ER /  Kwa Kwa /  Tobiasz Fuczek /  Rafał Chrzanowski /  Szymon Śleziona /  Marcin Szkup /  Szybki Mati /  Tomasz Baraniec(BR) / Kimich / Kane / Aleksander Osmałek`
+// calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(data)
@@ -46,7 +46,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Szybki Mati": 9.0,
         "Bartek Zdanowski": 8.8,
         "Paweł Maciejewski": 8.7,
-        "Daniel Tochwin": 8.2,
         "Dawid Will": 8.0,
         "Adam Syrek": 7.9,
         "Adam Piątek": 7.8,
@@ -80,7 +79,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Marcin Ziober": 3.0,
         "Mateusz Ziober": 2.9,
         "Sławomir Jeleń": 2.6,
-        "Rafał Chrzanowski": 1.5
+        "Rafał Chrzanowski": 1.5,
+        "Rafał Baraniec(BR)": 1.2
     }
     let defenceRanking = {
         "Andrzej Rukojć": 5.8,
@@ -114,20 +114,20 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Szymon Śleziona": 7.6,
         "Szymon Śleziona(BR)": 7.6,
         "Marcin Szkup": 2.5,
-        "Daniel Tochwin": 8.2,
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
         "Maciek ERa": 6.9,
         "Wiktor Ostolski": 7.8,
-        "Sławomir Jeleń": 3.6
+        "Sławomir Jeleń": 3.6,
+        "Rafał Baraniec(BR)": 4.5
     }
     found = found.filter(element => element)
     found.filter(element => {
         if (stableRanking[element] == undefined) {
             console.log("Nie znaleziono ratingu dla: ")
             console.log(found.filter(element => stableRanking[element] == undefined))
-            if (element.includes("GK")) {
+            if (element.includes("(BR)")&&element.includes("(GK)")) {
                 stableRanking[element] = 3.2
                 defenceRanking[element] = 6.1
             } else {
@@ -197,7 +197,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     console.log(team1)
     console.log("team2f")
     console.log(team2)
-    if (checkIfTeamGot3DefensiveCapable(team1) == false) {
+    if (checkIfTeamGot3DefensiveCapable(team1) == false && getNoOfDefenders(team2)>3 ) {
         let team2Defenders = team2.filter(element => (defenceRanking[element] > 6.0&&!element.includes("(BR)")))
         let bestDefenderToTakeIndex = 2
         if (team2Defenders.length > 4) {
@@ -208,7 +208,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         team2.splice(team2.indexOf(team2Defenders[team2Defenders.length - bestDefenderToTakeIndex]), 1)
         team2.push(team1[indexOfChange])
         team1.splice(indexOfChange, 1)
-        if (checkIfTeamGot3DefensiveCapable(team1) == false) {
+        if (checkIfTeamGot3DefensiveCapable(team1) == false && getNoOfDefenders(team2)>3) {
             let team2Defenders = team2.filter(element => (defenceRanking[element] > 6.0 &&!element.includes("(BR)")))    
             let bestDefenderToTakeIndex = 2
             if (team2Defenders.length > 4) {
@@ -220,7 +220,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             team2.push(team1[indexOfChange])
             team1.splice(indexOfChange, 1)
             if (checkIfTeamGot3DefensiveCapable(team1) == false) {
-                throw new Error("Not enough defenders")
+                // throw new Error("Not enough defenders")
             }
         }
 
@@ -231,7 +231,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         // console.log(team1)
         // console.log(team2)
     }
-    if (checkIfTeamGot3DefensiveCapable(team2) == false) {
+    if (checkIfTeamGot3DefensiveCapable(team2) == false && getNoOfDefenders(team1)>3) {
         // team2.push("Not enough defenders")
         //znajdz najwyższy def rating z danej drużyny
         // i zamień go z ondrop. ratingiem drużyny przeciwnej
@@ -248,7 +248,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         team1.splice(team1.indexOf(team1Defenders[team1Defenders.length - bestDefenderToTakeIndex]), 1)
         team1.push(team2[indexOfChange])
         team2.splice(indexOfChange, 1)
-        if (checkIfTeamGot3DefensiveCapable(team2) == false) {
+        if (checkIfTeamGot3DefensiveCapable(team2) == false && getNoOfDefenders(team1)>3) {
             let team1Defenders = team1.filter(element => (defenceRanking[element] > 6.0&&!element.includes("(BR)")))
             console.log(team1[team1.indexOf(team1Defenders[team1Defenders.length - 2])])
             let indexOfChange = team1.indexOf(team1Defenders[team1Defenders.length - 2])
@@ -416,6 +416,11 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         }
     }
 
+    function getNoOfDefenders(team1) {
+        let team1Defenders = team1.filter(element => defenceRanking[element] > 6.0)
+        return team1Defenders.length
+    }
+
     function addIfGkToOtherTeam(player, team1, team2) {
         if (player == undefined) {
             return;
@@ -438,9 +443,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         } else if (team2AlreadyGotBR) {
             if (player.includes(('(BR)'))) {
                 console.log("GK FOUND ")
-                team1.push(team2.pop())
-                team2.push(player)
-            } else {
                 team1.push(player)
             }
         } else {
