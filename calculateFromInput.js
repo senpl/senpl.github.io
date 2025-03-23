@@ -1,5 +1,5 @@
 let testString = `
-Michał Urbanek /  Paweł Macie /  Dawid Wi(BR) /  Maciek ER /  Kwa Kwa /  Tobiasz Fuczek /  Rafał Chrzanowski /  Szymon Śleziona /  Marcin Szkup /  Szybki Mati /  Tomasz Baraniec(BR) / Aleksander Osmałek`
+Bartek Pryszcz /  Dawid Will /  Paweł Maci /  Andrzej Rukojć /  Yura Savchuk /  Andrzej Doruchowski /  Kamil Kawa(BR) /  Rafał Chrzanowski(BR) /  Adam Wisniewski /  Szymon Śleziona /  Marcin Szkup /  Mateusz Ziober / Michał Urbanek / Joshua Kimmich`
 // calculateSquads(testString, false, false)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
@@ -447,11 +447,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
             } else {
                 team1.push(player)
             }
-        } else if (team2AlreadyGotBR) {
-            if (player.includes(('(BR)'))) {
+        } else if (team2AlreadyGotBR && player.includes('(BR)')) {
                 console.log("GK FOUND ")
                 team1.push(player)
-            }
         } else {
             let davidSwitch = true
             if (davidSwitch && (player.includes("Dawid Will") || player.includes("Paweł Maciejewski"))) {
