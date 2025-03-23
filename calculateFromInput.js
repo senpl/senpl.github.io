@@ -80,7 +80,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Mateusz Ziober": 2.9,
         "Sławomir Jeleń": 2.6,
         "Rafał Chrzanowski": 1.5,
-        "Rafał Baraniec(BR)": 1.2
+        "Rafał Baraniec(BR)": 1.2,
+        "Joshua Kimmich": 1.0,
     }
     let defenceRanking = {
         "Andrzej Rukojć": 5.8,
@@ -120,7 +121,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Maciek ERa": 6.9,
         "Wiktor Ostolski": 7.8,
         "Sławomir Jeleń": 3.6,
-        "Rafał Baraniec(BR)": 4.5
+        "Rafał Baraniec(BR)": 4.5,
+        "Joshua Kimmich": 2.4,
     }
     found = found.filter(element => element)
     found.filter(element => {
