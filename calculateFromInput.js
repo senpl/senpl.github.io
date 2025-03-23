@@ -355,11 +355,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     for (let index = 0; index < 7; index++) {
         finalAssign = finalAssign + '<p></p>'
         finalAssign = finalAssign + team1[index] + ' / ' + team2[index]
-
-        // console.log("t1+ "+team1[index])
-        // console.log(' / ')
-        // console.log("t2+ "+team2[index])
-        // console.log("finalAssign " + finalAssign)
     }
     let finalAssign3 = "Team 1    Team 2     (Vote Icon Trzymaj Się)"
     for (let index = 0; index < 7; index++) {
