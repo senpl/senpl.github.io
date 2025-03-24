@@ -12,11 +12,13 @@
     <p>
     <!-- known goalkeepers <input id="knownGoalkeepers" value='Andrzej Kruczyński, Szymon Śleziona, Kamil Kawa, Rafał Chrzanowski'/> -->
     <p>Data from source site </p>
-    <input id="playersNames" style="height: 300;" />
+    <input id="playersNames" style="height: 300; width: 900" ondblclick="getStored(getElementById('playersNames'),'playersNames')" />
     <button onclick="getStored(getElementById('playersNames'),'playersNames')" >GetStored</button>
     <button onclick="storeInBrowser('playersNames' ,getElementById('playersNames').value);getStored(getElementById('playersNames'),'playersNames')">Store in browser</button>
-    <button onclick="calculateSquads(getElementById('playersNames').value, false)">Granie Środowe</button>
-    <button onclick="calculateSquads(getElementById('playersNames').value, true)">Granie Niedzielne</button>
+    <button onclick="calculateSquads(getElementById('playersNames').value, false,true, true)">Granie Środowe</button>
+    <button onclick="calculateSquads(getElementById('playersNames').value, true, true, true)">Granie Niedzielne</button>
+    <button onclick="calculateSquads(getElementById('playersNames').value, false,true, false)">Granie Środowe(No David Prefs)</button>
+    <button onclick="calculateSquads(getElementById('playersNames').value, true, true, false)">Granie Niedzielne(No David Prefs)</button>
     <p id="result"></p>
 </body>
 
