@@ -22,6 +22,20 @@ function getStored(element,key){
     element.value = localStorage.getObj(key);
 }
 
+function storePrefInBrowser(name,element) {
+    //let previousRank=localStorage.getObj('ranking')
+    console.log(name, element)
+    if(element == undefined){
+        localStorage.setObj(name,0)
+    }else{
+        localStorage.setObj(name,element)
+    }
+    
+    // localStorage.setObj("ranking",previousRank);
+    //document.getElementById('result').innerHTML = name + '<br></br>'+rating
+    getStored(element,element)
+}
+
 // function getStored(){
 //     let text
 //     for (var i = 0; i < localStorage.length; i++){

@@ -1,8 +1,9 @@
 let testString = `
 Bartek Pryszcz /  Dawid Will /  Paweł Maci /  Andrzej Rukojć /  Yura Savchuk /  Andrzej Doruchowski /  Kamil Kawa(BR) /  Rafał Chrzanowski(BR) /  Adam Wisniewski /  Szymon Śleziona /  Marcin Szkup /  Mateusz Ziober / Michał Urbanek / Joshua Kimmich`
-// calculateSquads(testString, false, false)
+// calculateSquads(testString, false, false, false)
 
-function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
+function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch= true) {
+    console.log("dawidSwitch "+davidSwitch)
     console.log(data)
     let found = data.split('/')
     found = found.map(el => el.trim())
@@ -35,8 +36,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     if (found.filter(element => element.startsWith("Andrzej Ru"))) {
         found = replaceStringsStartingWith(found, "Andrzej Ru", "Andrzej Rukojć")
     }
-    if (found.filter(element => element.startsWith("Maciek ERa"))) {
-        found = replaceStringsStartingWith(found, "Maciek ERa", "Maciek ERa")
+    if (found.filter(element => element.startsWith("Maciek ER"))) {
+        found = replaceStringsStartingWith(found, "Maciek ER", "Maciek ER")
     }
     if (found.filter(element => element.startsWith("Roma Sam"))) {
         found = replaceStringsStartingWith(found, "Roma Sam", "Roma Samkovskiy")
@@ -45,7 +46,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
     let stableRanking = {
         "Szybki Mati": 9.0,
         "Bartek Zdanowski": 8.5,
-        "Paweł Maciejewski": 8.7,
+        "Paweł Maciejewski": 8.8,
         "Dawid Will": 8.0,
         "Adam Syrek": 7.9,
         "Adam Piątek": 7.8,
@@ -53,18 +54,18 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Ryba": 7.6, //Ryba alias Krzysiek K.
         "Daniel Toporczyk": 7.5,
         "Bogumił Gr": 7.1,
-        "Adam Wisniewski": 7.0,
+        "Szymon Śleziona": 7.0,
         "Wiktor Ostolski": 6.9,
-        "Szymon Śleziona": 6.8,
+        "Adam Wisniewski": 6.8,
         "Bartek Pryszcz": 6.7,
         "Inny": 5.0,
+        "Andrzej Rukojć": 6.6,
         "Yura Savchuk": 6.5,
         "Michał Siewniak": 6.4,
-        "Maciek ERa": 6.3,
+        "Maciek ER": 6.3,
         "Roma Samkovskiy": 6.2,
         "Kamil Kawa(BR)": 6.0,
-        "Andrzej Rukojć": 5.6,
-        "Andrzej Doruchowski": 5.5,
+        "Andrzej Doruchowski": 5.6,
         "Szymon Śleziona(BR)": 5.3,
         "Michal Ce": 4.9,
         "Marek Ziober": 4.8,
@@ -74,7 +75,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Andrzej Kruczyński(BR)": 3.7,
         "Oliwier Sulima": 3.8,
         "Rafał Chrzanowski(BR)": 3.7,
-        "Marcin Szkup": 3.6,
+        "Marcin Szkup": 3.5,
         "Illia Leo Ti Lish": 3.2,
         "Marcin Ziober": 3.0,
         "Mateusz Ziober": 2.9,
@@ -104,7 +105,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Ryba": 6.9, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 6.2,
         "Aleksander Osmałek": 4.2,
-        "Andrzej Doruchowski": 4.5,
+        "Andrzej Doruchowski": 4.8,
         "Adam Syrek": 6.9,
         "Oliwier Sulima": 5.6,
         "Michal Ce": 5.9,
@@ -112,13 +113,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         "Adam Piątek": 9.0,
         "Szybki Mati": 7.9,
         "Bartek Zdanowski": 8.8,
-        "Szymon Śleziona": 7.6,
+        "Szymon Śleziona": 8.6,
         "Szymon Śleziona(BR)": 7.6,
         "Marcin Szkup": 2.5,
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
         "Marcin Ziober": 3.0,
-        "Maciek ERa": 6.9,
+        "Maciek ER": 6.9,
         "Wiktor Ostolski": 7.8,
         "Sławomir Jeleń": 3.6,
         "Rafał Baraniec(BR)": 4.5,
@@ -230,8 +231,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
         team2.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
         team1 = team1.filter(element => element != undefined)
         team2 = team2.filter(element => element != undefined)
-        // console.log(team1)
-        // console.log(team2)
+        console.log(team1)
+        console.log(team2)
     }
     if (checkIfTeamGot3DefensiveCapable(team2) == false && getNoOfDefenders(team1)>3) {
         // team2.push("Not enough defenders")
@@ -446,7 +447,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true) {
                 console.log("GK FOUND ")
                 team1.push(player)
         } else {
-            let davidSwitch = true
+            // let davidSwitch = true
             if (davidSwitch && (player.includes("Dawid Will") || player.includes("Paweł Maciejewski"))) {
                 checkIfPlayerIsAvoidedByDavid(player, team1, team2)
             } else {
