@@ -2,7 +2,8 @@ let testString = `
 Bartek Pryszcz /  Dawid Will /  Paweł Maci /  Andrzej Rukojć /  Yura Savchuk /  Andrzej Doruchowski /  Kamil Kawa(BR) /  Rafał Chrzanowski(BR) /  Adam Wisniewski /  Szymon Śleziona /  Marcin Szkup /  Mateusz Ziober / Michał Urbanek / Joshua Kimmich`
 // calculateSquads(testString, false, false, false)
 
-function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch= true) {
+function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch= true, variation=0.2) {
+    console.log("variation "+variation)
     console.log("dawidSwitch "+davidSwitch)
     console.log(data)
     let found = data.split('/')
@@ -320,7 +321,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
 
     for (let i = 0; i < team1WithRating.length; i++) {
         if (team1WithRating[i] != undefined && team2WithRating[i] != undefined) {
-            if (team1WithRating[i][1] - team2WithRating[i][1] <= 0.2 && !team1WithRating[i][0].includes("(BR)") &&!team2WithRating[i][0].includes("(BR)")) {
+            if (team1WithRating[i][1] - team2WithRating[i][1] <= variation && !team1WithRating[i][0].includes("(BR)") &&!team2WithRating[i][0].includes("(BR)")) {
                 // console.log("team1WithRating[i][1] " + team1WithRating[i] + " swapped for team2WithRating[i][1] " + team2WithRating[i])
                 team4.push(team1WithRating[i][0])
                 team3.push(team2WithRating[i][0])
