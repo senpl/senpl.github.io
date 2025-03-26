@@ -382,10 +382,10 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         finalAssign2=finalAssign2.replaceAll("undefined", "")
         finalAssign3=finalAssign3.replaceAll("undefined", "")
         finalAssign4=finalAssign4.replaceAll("undefined", "")
-        finalAssign=finalAssign.replace("<p></p> / ", "")
-        finalAssign2=finalAssign2.replace("<p></p> / ", "")
-        finalAssign3=finalAssign3.replace("<p></p> / ", "")
-        finalAssign4=finalAssign4.replace("<p></p> / ", "")
+        finalAssign=finalAssign.replace("<p></p> / <p", "")
+        finalAssign2=finalAssign2.replace("<p></p> / <p", "")
+        finalAssign3=finalAssign3.replace("<p></p> / <p", "")
+        finalAssign4=finalAssign4.replace("<p></p> / <p", "")
 
         document.getElementById('result').innerHTML = finalAssign + "<br></br><br></br>" + finalAssign2
             + "<br></br><br></br>" + finalAssign3 + "<br></br><br></br>" + finalAssign4
