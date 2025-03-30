@@ -34,6 +34,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     if (found.filter(element => element.startsWith("Kwa Kwa"))) {
         found = replaceStringsStartingWith(found, "Kwa Kwa", "Ryba")
     }
+    if (found.filter(element => element.startsWith("Krz Krz"))) {
+        found = replaceStringsStartingWith(found, "Krz Krz", "Ryba")
+    }
     if (found.filter(element => element.startsWith("Andrzej Ru"))) {
         found = replaceStringsStartingWith(found, "Andrzej Ru", "Andrzej Rukojć")
     }
@@ -42,6 +45,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     }
     if (found.filter(element => element.startsWith("Roma Sam"))) {
         found = replaceStringsStartingWith(found, "Roma Sam", "Roma Samkovskiy")
+    }
+    if (found.filter(element => element.startsWith("Daniel To"))) {
+        found = replaceStringsStartingWith(found, "Daniel To", "Daniel Toporczyk")
     }
     console.log(found)
     let stableRanking = {
