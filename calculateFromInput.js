@@ -401,27 +401,17 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     }
 
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
-        console.log("p;" + player)
-        console.log(player.includes("Dawid Will"))
-        console.log(team2.some(element => element.includes('Mateusz Szyba')))
-        console.log(team1.some(element => element.includes('Paweł Maciejewski')))
         if (player.includes("Dawid Will") && (team1.some(element => element.includes('Mateusz Szyba')) || team2.some(element => element.includes('Mateusz Szyba'))) && ((team2.some(element => element.includes('Paweł Maciejewski')))) || team1.some(element => element.includes('Paweł Maciejewski'))) {
             console.log("Paweł Maciejewski and Szyba found david switch on")
             if (team2.includes('Mateusz Szyba')) {
                 team1.splice(0, 1)
                 team2.push("Paweł Maciejewski")
                 team1.push(player)
-                team2.push(keysIterator.next().value)
             } else {
                 team2.splice(0, 1)
                 team1.push("Mateusz Szyba")
                 team2.push(player)
-                team1.push(keysIterator.next().value)
             }
-            // console.log("team1")
-            // console.log(team1)
-            // console.log("team2")
-            // console.log(team2)
             team2.filter(element => element != undefined)
             team1.filter(element => element != undefined)
         }
