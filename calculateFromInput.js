@@ -1,7 +1,7 @@
 let testString = `
 Michał Urbanek /  Bartek Prys /  Paweł Maciejew /  Dawid Willan> /  Maciek ER /  Kamil Kawa /  Michał Siewniak /  Tobiasz Fuczek /  Szymon Śleziona /  Marcin Szkup /  Mateusz Ziober /  Szybki Mati /  Adam Piątek /  Aleksander Osmałek
 `
-calculateSquads(testString, false, false, true, 0.3)
+// calculateSquads(testString, false, false, true, 0.3)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch = true, variation = 0.2) {
     console.log("variation " + variation)
@@ -245,12 +245,10 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         console.log(team2)
     }
     if (checkIfTeamGot3DefensiveCapable(team2) == false && getNoOfDefenders(team1) > 3) {
-        // team2.push("Not enough defenders")
         //znajdz najwyższy def rating z danej drużyny
         // i zamień go z ondrop. ratingiem drużyny przeciwnej
 
         let team1Defenders = team1.filter(element => (defenceRanking[element] > 6.0 && !element.includes("(BR)")))
-        // console.log(team1Defenders.length)
         let bestDefenderToTakeIndex = 2
         // if (team1Defenders.length > 4) {
         //     bestDefenderToTakeIndex = 3
@@ -331,7 +329,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     for (let i = 0; i < team1WithRating.length; i++) {
         if (team1WithRating[i] != undefined && team2WithRating[i] != undefined) {
             if (Math.abs(team1WithRating[i][1] - team2WithRating[i][1]) <= variation && !team1WithRating[i][0].includes("(BR)") && !team2WithRating[i][0].includes("(BR)")) {
-                // console.log("team1WithRating[i][1] " + team1WithRating[i] + " swapped for team2WithRating[i][1] " + team2WithRating[i])
                 team4.push(team1WithRating[i][0])
                 team3.push(team2WithRating[i][0])
                 if (i > 4) {
@@ -414,7 +411,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
                 team2.splice(0, 1)
                 team1.push("Mateusz Szyba")
                 team2.push(player)
-                // team2.push(keysIterator.next().value)
             }
             team2.filter(element => element != undefined)
             team1.filter(element => element != undefined)
@@ -470,9 +466,6 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
             console.log("GK FOUND ")
             team1.push(player)
         } else {
-            // let davidSwitch = true
-            console.log(davidSwitch)
-            console.log("player " + player)
             if (davidSwitch && (player.includes("Dawid Will") || player.includes("Paweł Maciejewski"))) {
                 checkIfPlayerIsAvoidedByDavid(player, team1, team2)
             } else {
