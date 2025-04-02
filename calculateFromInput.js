@@ -395,9 +395,12 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         finalAssign2 = finalAssign2.replace("<p></p> / <p", "")
         finalAssign3 = finalAssign3.replace("<p></p> / <p", "")
         finalAssign4 = finalAssign4.replace("<p></p> / <p", "")
-
-        document.getElementById('result').innerHTML = finalAssign + "<br></br><br></br>" + finalAssign2
-            + "<br></br><br></br>" + finalAssign3 + "<br></br><br></br>" + finalAssign4
+        let playersByRating=sortedByRating.keys()
+        let bestRatingPlayer=playersByRating.next().value
+        let secondBestRatingPlayer=playersByRating.next().value
+        let finalAssign5 = "Wybieramy siłowo pierwszy " + secondBestRatingPlayer + " jednego, potem " + bestRatingPlayer + " 2ch i dalej po 2 (Vote Icon Wrr)"
+        document.getElementById('result').innerHTML = finalAssign + "<br><p></p></br>" + finalAssign2
+            + "<br><p></p></br>" + finalAssign3 + "<br><p></p></br>" + finalAssign4 + "<br><p></p></br>" + finalAssign5
     }
 
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
