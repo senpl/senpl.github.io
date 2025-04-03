@@ -105,7 +105,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         "Roma Samkovskiy": 6.6,
         "Yura Savchuk": 3.7,
         "Marek Ziober": 3.8,
-        "Kamil Kawa": 5.9,
+        "Kamil Kawa": 6.1,
         "Kamil Kawa(BR)": 9.0,
         "Michał Siewniak": 7.8,
         "Rafał Chrzanowski(BR)": 6.1,
@@ -118,7 +118,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         "Adam Syrek": 6.9,
         "Oliwier Sulima": 5.6,
         "Michal Ce": 5.9,
-        "Tobiasz Fuczek": 6.6,
+        "Tobiasz Fuczek": 5.6,
         "Adam Piątek": 9.0,
         "Szybki Mati": 7.9,
         "Bartek Zdanowski": 8.8,
@@ -401,15 +401,17 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     }
 
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
-        if (player.includes("Dawid Will") && (team1.some(element => element.includes('Mateusz Szyba')) || team2.some(element => element.includes('Mateusz Szyba'))) && ((team2.some(element => element.includes('Paweł Maciejewski')))) || team1.some(element => element.includes('Paweł Maciejewski'))) {
-            console.log("Paweł Maciejewski and Szyba found david switch on")
-            if (team2.includes('Mateusz Szyba')) {
+        if (player.includes("Dawid Will") && (team1.some(element => element.includes('Szybki Mati')) || team2.some(element => element.includes('Szybki Mati'))) && ((team2.some(element => element.includes('Paweł Maciejewski')))) || team1.some(element => element.includes('Paweł Maciejewski'))) {
+            console.log("Paweł Maciejewski and Szybki Mati found david switch on")
+            if(team1.includes('Szybki Mati')&& !team2.includes('Bartek Zdanowski')) {
+                team2.push(player)
+            } else if (team2.includes('Szybki Mati')) {
                 team2.splice(0, 1)
                 team2.push("Paweł Maciejewski")
                 team1.push(player)
             } else {
                 team2.splice(0, 1)
-                team1.push("Mateusz Szyba")
+                team1.push("Szybki Mati")
                 team2.push(player)
             }
             team2.filter(element => element != undefined)
@@ -418,7 +420,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         else if (player.includes("Paweł Ma") && team1.some(element => element.includes('Dawid Will'))) {
             console.log("Paweł Maciejewski found david switch on")
             team2.push(player)
-        } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Mateusz Szyba'))) {
+        } else if (player.includes("Dawid Will") && team1.some(element => element.includes('Szybki Mati'))) {
             team2.push(player);
             team1.push(keysIterator.next().value)
             team1.push(keysIterator.next().value)
