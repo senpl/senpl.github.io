@@ -1,6 +1,117 @@
 let testString = `
 Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Maciek ER /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober /  Rafał Sobota /  Szybki Mati`
-calculateSquads(testString, false, false, false, 0.3)
+// calculateSquads(testString, false, false, false, 0.3)
+
+let stableRanking = {
+        "Szybki Mati": 9.0,
+        "Bartek Zdanowski": 8.7,
+        "Paweł Maciejewski": 8.8,
+        "Dawid Will": 8.0,
+        "Adam Syrek": 7.9,
+        "Adam Piątek": 7.8,
+        "Tobiasz Fuczek": 7.9,
+        "Ryba": 7.6, //Ryba alias Krzysiek K.
+        "Daniel Toporczyk": 8.5,
+        "Rafał Sobota": 7.3,
+        "Bogumił Gr": 7.1,
+        "Szymon Śleziona": 7.0,
+        "Wiktor Ostolski": 6.9,
+        "Adam Wisniewski": 6.8,
+        "Bartek Pryszcz": 6.7,
+        "Lucjan Kowalski": 6.6,
+        "Inny": 5.0,
+        "Andrzej Rukojć": 6.4,
+        "Yura Savchuk": 6.5,
+        "Michał Siewniak": 6.3,
+        "Roma Samkovskiy": 6.2,
+        "Kamil Kawa(BR)": 6.1,
+        "Maciek ER": 5.7,
+        "Andrzej Doruchowski": 5.8,
+        "Szymon Śleziona(BR)": 5.6,
+        "Michal Ce": 5.9,
+        "Marek Ziober": 4.8,
+        "Michał Urbanek": 4.6,
+        "Mateusz Szojda": 4.5,
+        "Aleksander Osmałek": 4.1,
+        "Kamil Kawa": 4.5,
+        "Andrzej Kruczyński(BR)": 3.7,
+        "Oliwier Sulima": 4.5,
+        "Rafał Chrzanowski(BR)": 3.9,
+        "Mariusz od Murzyna": 3.7,
+        "Marcin Szkup": 3.5,
+        "Daniel (od Romy)": 3.4,
+        "Denis": 3.3,
+        "Illia Leo Ti Lish": 3.2,
+        "Marcin Ziober": 3.0,
+        "Mateusz Ziober": 2.9,
+        "Sławomir Jeleń": 3.2,
+        "Rafał Chrzanowski": 3.1,
+        "Rafał Baraniec(BR)": 1.2,
+        "Joshua Kimmich": 1.0,
+        "Random 1": 3.9,
+        "Random 2": 3.8,
+        "Random 3": 3.6,
+        "Random 4": 3.5,
+        "Random 5": 3.4,
+        "Random Dobry": 6.5,
+        "Random Zły": 2.5,
+        "Random Bardzo dobry": 8.5,
+    }
+    let defenceRanking = {
+        "Andrzej Rukojć": 5.8,
+        "Bartek Pryszcz": 6.8,
+        "Dawid Will": 8.5,
+        "Daniel Toporczyk": 8.5,
+        "Rafał Sobota": 7.3,
+        "Bogumił Gr": 8.9,
+        "Inny": 5.0,
+        "Illia Leo Ti Lish": 2.7,
+        "Paweł Maciejewski": 5.3,
+        "Roma Samkovskiy": 6.6,
+        "Yura Savchuk": 3.7,
+        "Marek Ziober": 3.8,
+        "Kamil Kawa": 6.1,
+        "Kamil Kawa(BR)": 9.0,
+        "Michał Siewniak": 7.8,
+        "Rafał Chrzanowski(BR)": 6.1,
+        "Rafał Chrzanowski": 3.5,
+        "Adam Wisniewski": 5.5,
+        "Ryba": 6.9, //Ryba alias Krzysiek K.
+        "Andrzej Kruczyński(BR)": 6.2,
+        "Aleksander Osmałek": 4.2,
+        "Andrzej Doruchowski": 4.8,
+        "Adam Syrek": 6.9,
+        "Oliwier Sulima": 5.6,
+        "Michal Ce": 6.1,
+        "Tobiasz Fuczek": 5.6,
+        "Adam Piątek": 9.0,
+        "Szybki Mati": 7.9,
+        "Bartek Zdanowski": 8.8,
+        "Szymon Śleziona": 8.6,
+        "Szymon Śleziona(BR)": 7.9,
+        "Lucjan Kowalski": 5.9,
+        "Marcin Szkup": 2.5,
+        "Michał Urbanek": 3.8,
+        "Mateusz Ziober": 0.9,
+        "Marcin Ziober": 3.0,
+        "Mariusz od Murzyna": 3.8,
+        "Daniel (od Romy)": 4.4,
+        "Denis": 4.3,
+        "Maciek ER": 6.9,
+        "Wiktor Ostolski": 7.8,
+        "Sławomir Jeleń": 3.6,
+        "Mateusz Szojda": 3.5,
+        "Rafał Baraniec(BR)": 4.5,
+        "Joshua Kimmich": 2.4,
+        "Random 1": 3.9,
+        "Random 2": 3.8,
+        "Random 3": 3.6,
+        "Random 4": 3.5,
+        "Random 5": 3.4,
+        "Random Dobry": 6.5,
+        "Random Zły": 2.5,
+        "Random Bardzo dobry": 8.5,
+    }
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch = true, variation = 0.2) {
     console.log("variation " + variation)
@@ -55,100 +166,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         found = replaceStringsStartingWith(found, "Illia Leo Ti", "Illia Leo Ti Lish")
     }
     console.log(found)
-    let stableRanking = {
-        "Szybki Mati": 9.0,
-        "Bartek Zdanowski": 8.7,
-        "Paweł Maciejewski": 8.8,
-        "Dawid Will": 8.0,
-        "Adam Syrek": 7.9,
-        "Adam Piątek": 7.8,
-        "Tobiasz Fuczek": 7.9,
-        "Ryba": 7.6, //Ryba alias Krzysiek K.
-        "Daniel Toporczyk": 8.5,
-        "Rafał Sobota": 7.3,
-        "Bogumił Gr": 7.1,
-        "Szymon Śleziona": 7.0,
-        "Wiktor Ostolski": 6.9,
-        "Adam Wisniewski": 6.8,
-        "Bartek Pryszcz": 6.7,
-        "Lucjan Kowalski": 6.6,
-        "Inny": 5.0,
-        "Andrzej Rukojć": 6.4,
-        "Yura Savchuk": 6.5,
-        "Michał Siewniak": 6.3,
-        "Roma Samkovskiy": 6.2,
-        "Kamil Kawa(BR)": 6.1,
-        "Maciek ER": 5.7,
-        "Andrzej Doruchowski": 5.8,
-        "Szymon Śleziona(BR)": 5.6,
-        "Michal Ce": 5.9,
-        "Marek Ziober": 4.8,
-        "Michał Urbanek": 4.6,
-        "Mateusz Szojda": 4.5,
-        "Aleksander Osmałek": 4.1,
-        "Kamil Kawa": 4.5,
-        "Andrzej Kruczyński(BR)": 3.7,
-        "Oliwier Sulima": 4.5,
-        "Rafał Chrzanowski(BR)": 3.9,
-        "Mariusz od Murzyna": 3.7,
-        "Marcin Szkup": 3.5,
-        "Daniel (od Romy)": 3.4,
-        "Denis": 3.3,
-        "Illia Leo Ti Lish": 3.2,
-        "Marcin Ziober": 3.0,
-        "Mateusz Ziober": 2.9,
-        "Sławomir Jeleń": 3.2,
-        "Rafał Chrzanowski": 3.1,
-        "Rafał Baraniec(BR)": 1.2,
-        "Joshua Kimmich": 1.0,
-    }
-    let defenceRanking = {
-        "Andrzej Rukojć": 5.8,
-        "Bartek Pryszcz": 6.8,
-        "Dawid Will": 8.5,
-        "Daniel Toporczyk": 8.5,
-        "Rafał Sobota": 7.3,
-        "Bogumił Gr": 8.9,
-        "Inny": 5.0,
-        "Illia Leo Ti Lish": 2.7,
-        "Paweł Maciejewski": 5.3,
-        "Roma Samkovskiy": 6.6,
-        "Yura Savchuk": 3.7,
-        "Marek Ziober": 3.8,
-        "Kamil Kawa": 6.1,
-        "Kamil Kawa(BR)": 9.0,
-        "Michał Siewniak": 7.8,
-        "Rafał Chrzanowski(BR)": 6.1,
-        "Rafał Chrzanowski": 3.5,
-        "Adam Wisniewski": 5.5,
-        "Ryba": 6.9, //Ryba alias Krzysiek K.
-        "Andrzej Kruczyński(BR)": 6.2,
-        "Aleksander Osmałek": 4.2,
-        "Andrzej Doruchowski": 4.8,
-        "Adam Syrek": 6.9,
-        "Oliwier Sulima": 5.6,
-        "Michal Ce": 6.1,
-        "Tobiasz Fuczek": 5.6,
-        "Adam Piątek": 9.0,
-        "Szybki Mati": 7.9,
-        "Bartek Zdanowski": 8.8,
-        "Szymon Śleziona": 8.6,
-        "Szymon Śleziona(BR)": 7.9,
-        "Lucjan Kowalski": 5.9,
-        "Marcin Szkup": 2.5,
-        "Michał Urbanek": 3.8,
-        "Mateusz Ziober": 0.9,
-        "Marcin Ziober": 3.0,
-        "Mariusz od Murzyna": 3.8,
-        "Daniel (od Romy)": 4.4,
-        "Denis": 4.3,
-        "Maciek ER": 6.9,
-        "Wiktor Ostolski": 7.8,
-        "Sławomir Jeleń": 3.6,
-        "Mateusz Szojda": 3.5,
-        "Rafał Baraniec(BR)": 4.5,
-        "Joshua Kimmich": 2.4,
-    }
+    
     found = found.filter(element => element)
     found.filter(element => {
         if (stableRanking[element] == undefined) {
@@ -496,3 +514,33 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         }
     }
 }
+
+// Funkcja do generowania klikalnej listy zawodników
+function renderPlayersList() {
+    // Upewnij się, że stableRanking jest dostępny globalnie
+    if (typeof stableRanking === "undefined") return;
+    const playersListDiv = document.getElementById('playersList');
+    if (!playersListDiv) return;
+    playersListDiv.innerHTML = '';
+    Object.keys(stableRanking).sort((a, b) => stableRanking[b] - stableRanking[a]).forEach(player => {
+        const btn = document.createElement('button');
+        btn.textContent = player + " (" + stableRanking[player] + ")";
+        btn.style.margin = "2px";
+        btn.onclick = function() {
+            const input = document.getElementById('playersNames');
+            if (!input.value.includes(player)) {
+                if (input.value.trim() !== "") input.value += " / ";
+                input.value += player;
+            }
+        };
+        playersListDiv.appendChild(btn);
+    });
+}
+
+// Uczyń stableRanking globalnym
+window.stableRanking = stableRanking;
+
+// Automatycznie generuj listę po załadowaniu strony
+window.onload = function() {
+    if (typeof renderPlayersList === "function") renderPlayersList();
+};

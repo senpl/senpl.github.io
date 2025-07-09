@@ -19,7 +19,9 @@ function storeInBrowser(name,rating,element) {
 function getStored(element,key){
     console.log(localStorage)
     console.log(localStorage.getObj(key))
-    element.value = localStorage.getObj(key);
+    if (element && typeof element === "object" && "value" in element) {
+        element.value = localStorage.getObj(key);
+    }
 }
 
 function storePrefInBrowser(name,element) {
