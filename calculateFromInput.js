@@ -1,7 +1,6 @@
 let testString = `
-Michał Urbanek /  Bartek Prys /  Paweł Maciejew /  Dawid Willan> /  Maciek ER /  Kamil Kawa /  Michał Siewniak /  Tobiasz Fuczek /  Szymon Śleziona /  Marcin Szkup /  Mateusz Ziober /  Szybki Mati /  Adam Piątek /  Aleksander Osmałek
-`
-// calculateSquads(testString, false, false, true, 0.3)
+Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Maciek ER /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober /  Rafał Sobota /  Szybki Mati`
+calculateSquads(testString, false, false, false, 0.3)
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch = true, variation = 0.2) {
     console.log("variation " + variation)
@@ -52,6 +51,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     } else if (found.filter(element => element.startsWith("Daniel"))) {
         found = replaceStringsStartingWith(found, "Daniel", "Daniel (od Romy)")
     }
+    if (found.filter(element => element.startsWith("Illia Leo Ti"))) {
+        found = replaceStringsStartingWith(found, "Illia Leo Ti", "Illia Leo Ti Lish")
+    }
     console.log(found)
     let stableRanking = {
         "Szybki Mati": 9.0,
@@ -63,11 +65,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         "Tobiasz Fuczek": 7.9,
         "Ryba": 7.6, //Ryba alias Krzysiek K.
         "Daniel Toporczyk": 8.5,
+        "Rafał Sobota": 7.3,
         "Bogumił Gr": 7.1,
         "Szymon Śleziona": 7.0,
         "Wiktor Ostolski": 6.9,
         "Adam Wisniewski": 6.8,
         "Bartek Pryszcz": 6.7,
+        "Lucjan Kowalski": 6.6,
         "Inny": 5.0,
         "Andrzej Rukojć": 6.4,
         "Yura Savchuk": 6.5,
@@ -103,6 +107,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         "Bartek Pryszcz": 6.8,
         "Dawid Will": 8.5,
         "Daniel Toporczyk": 8.5,
+        "Rafał Sobota": 7.3,
         "Bogumił Gr": 8.9,
         "Inny": 5.0,
         "Illia Leo Ti Lish": 2.7,
@@ -129,6 +134,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         "Bartek Zdanowski": 8.8,
         "Szymon Śleziona": 8.6,
         "Szymon Śleziona(BR)": 7.9,
+        "Lucjan Kowalski": 5.9,
         "Marcin Szkup": 2.5,
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
@@ -404,12 +410,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         let bestRatingPlayer=playersByRating.next().value
         let secondBestRatingPlayer=playersByRating.next().value
         let finalAssign5 = "Wybieramy siłowo pierwszy " + secondBestRatingPlayer + " jednego, potem " + bestRatingPlayer + " 2ch i dalej po 2 (Vote Icon Wrr)"
+        let finalAssign6 = "Wybieramy siłowo przez losowych graczy, pierwszy 1 potem 2gi dwóch i po 1 (Vote Icon Przykro mi(Cry))"
         document.getElementById('result').innerHTML = finalAssign + "<br><p></p></br>" + finalAssign2
-            + "<br><p></p></br>" + finalAssign3 + "<br><p></p></br>" + finalAssign4 + "<br><p></p></br>" + finalAssign5
+            + "<br><p></p></br>" + finalAssign3 + "<br><p></p></br>" + finalAssign4 + "<br><p></p></br>" + finalAssign5+ "<br><p></p></br>" + finalAssign6
     }
 
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
-        if (player.includes("Dawid Will") && (team1.some(element => element.includes('Szybki Mati')) || team2.some(element => element.includes('Szybki Mati'))) && ((team2.some(element => element.includes('Paweł Maciejewski')))) || team1.some(element => element.includes('Paweł Maciejewski'))) {
+        if (player.includes("Dawid Will") && (team1.some(element => element.includes('Szybki Mati')) || team2.some(element => element.includes('Szybki Mati'))) && ((team2.some(element => element.includes('Paweł Maciejewski')))) || team1.some(element => element.includes('Szybki Mati'))) {
             console.log("Paweł Maciejewski and Szybki Mati found david switch on")
             if(team1.includes('Szybki Mati')&& !team2.includes('Bartek Zdanowski')) {
                 team2.push(player)
