@@ -57,6 +57,64 @@ let stableRanking = {
         "Random Zły": 2.5,
         "Random Bardzo dobry": 8.5,
     }
+    
+let sumaPowołań = {
+        "Szybki Mati": 20,
+        "Bartek Zdanowski": 29,
+        "Paweł Maciejewski": 30,
+        "Dawid Will": 43,
+        "Adam Syrek": 2,
+        "Adam Piątek": 36,
+        "Tobiasz Fuczek": 20,
+        "Ryba": 14, //Ryba alias Krzysiek K.
+        "Daniel Toporczyk": 2,
+        "Rafał Sobota": 2.3,
+        "Bogumił Gr": 13,
+        "Szymon Śleziona": 7.0,
+        "Wiktor Ostolski": 6.9,
+        "Adam Wisniewski": 16.8,
+        "Bartek Pryszcz": 44,
+        "Lucjan Kowalski": 6.6,
+        "Inny": 1,
+        "Andrzej Rukojć": 6.4,
+        "Yura Savchuk": 24,
+        "Michał Siewniak": 6.3,
+        "Roma Samkovskiy": 20.2,
+        "Kamil Kawa(BR)": 27,
+        "Maciek ER": 30,
+        "Andrzej Doruchowski": 15,
+        "Szymon Śleziona(BR)": 12,
+        "Michal Ce": 7,
+        "Marek Ziober": 4.8,
+        "Michał Urbanek": 24.6,
+        "Mateusz Szojda": 4.5,
+        "Aleksander Osmałek": 22,
+        "Kamil Kawa": 4.5,
+        "Andrzej Kruczyński(BR)": 0.7,
+        "Oliwier Sulima": 4.5,
+        "Rafał Chrzanowski(BR)": 25,
+        "Mariusz od Murzyna": 2,
+        "Marcin Szkup": 42,
+        "Daniel (od Romy)": 2,
+        "Denis": 4,
+        "Illia Leo Ti Lish": 10,
+        "Marcin Ziober": 3.0,
+        "Mateusz Ziober": 27,
+        "Sławomir Jeleń": 3.2,
+        "Rafał Chrzanowski": 3.1,
+        "Rafał Baraniec(BR)": 1.2,
+        "Joshua Kimmich": 1.0,
+        "Random 1": 1,
+        "Random 2": 1,
+        "Random 3": 1,
+        "Random 4": 1,
+        "Random 5": 1,
+        "Random Dobry": 1,
+        "Random Zły": 1,
+        "Random Bardzo dobry": 0,
+}
+
+
     let defenceRanking = {
         "Andrzej Rukojć": 5.8,
         "Bartek Pryszcz": 6.8,
@@ -517,24 +575,26 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
 
 // Funkcja do generowania klikalnej listy zawodników
 function renderPlayersList() {
-    // Upewnij się, że stableRanking jest dostępny globalnie
-    if (typeof stableRanking === "undefined") return;
+ if (typeof stableRanking === "undefined" || typeof sumaPowołań === "undefined") return;
+    if (typeof stableRanking === "undefined" || typeof sumaPowołań === "undefined") return;
     const playersListDiv = document.getElementById('playersList');
     if (!playersListDiv) return;
     playersListDiv.innerHTML = '';
-    Object.keys(stableRanking).sort((a, b) => stableRanking[b] - stableRanking[a]).forEach(player => {
-        const btn = document.createElement('button');
-        btn.textContent = player + " (" + stableRanking[player] + ")";
-        btn.style.margin = "2px";
-        btn.onclick = function() {
-            const input = document.getElementById('playersNames');
-            if (!input.value.includes(player)) {
-                if (input.value.trim() !== "") input.value += " / ";
-                input.value += player;
-            }
-        };
-        playersListDiv.appendChild(btn);
-    });
+    Object.keys(stableRanking)
+        .sort((a, b) => (sumaPowołań[b] || 0) - (sumaPowołań[a] || 0))
+        .forEach(player => {
+            const btn = document.createElement('button');
+            btn.textContent = player + " (" + (stableRanking[player] || 0) + ")";
+            btn.style.margin = "2px";
+            btn.onclick = function() {
+                const input = document.getElementById('playersNames');
+                if (!input.value.includes(player)) {
+                    if (input.value.trim() !== "") input.value += " / ";
+                    input.value += player;
+                }
+            };
+            playersListDiv.appendChild(btn);
+        });
 }
 
 // Uczyń stableRanking globalnym
