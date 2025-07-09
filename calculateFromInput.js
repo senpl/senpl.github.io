@@ -1,7 +1,3 @@
-let testString = `
-Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Maciek ER /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober /  Rafał Sobota /  Szybki Mati`
-// calculateSquads(testString, false, false, false, 0.3)
-
 let stableRanking = {
         "Szybki Mati": 9.0,
         "Bartek Zdanowski": 8.7,
@@ -57,6 +53,69 @@ let stableRanking = {
         "Random Zły": 2.5,
         "Random Bardzo dobry": 8.5,
     }
+let defenceRanking = {
+        "Andrzej Rukojć": 5.8,
+        "Bartek Pryszcz": 6.8,
+        "Dawid Will": 8.5,
+        "Daniel Toporczyk": 8.5,
+        "Rafał Sobota": 7.3,
+        "Bogumił Gr": 8.9,
+        "Inny": 5.0,
+        "Illia Leo Ti Lish": 2.7,
+        "Paweł Maciejewski": 5.3,
+        "Roma Samkovskiy": 6.6,
+        "Yura Savchuk": 3.7,
+        "Marek Ziober": 3.8,
+        "Kamil Kawa": 6.1,
+        "Kamil Kawa(BR)": 9.0,
+        "Michał Siewniak": 7.8,
+        "Rafał Chrzanowski(BR)": 6.1,
+        "Rafał Chrzanowski": 3.5,
+        "Adam Wisniewski": 5.5,
+        "Ryba": 6.9, //Ryba alias Krzysiek K.
+        "Andrzej Kruczyński(BR)": 6.2,
+        "Aleksander Osmałek": 4.2,
+        "Andrzej Doruchowski": 4.8,
+        "Adam Syrek": 6.9,
+        "Oliwier Sulima": 5.6,
+        "Michal Ce": 6.1,
+        "Tobiasz Fuczek": 5.6,
+        "Adam Piątek": 9.0,
+        "Szybki Mati": 7.9,
+        "Bartek Zdanowski": 8.8,
+        "Szymon Śleziona": 8.6,
+        "Szymon Śleziona(BR)": 7.9,
+        "Lucjan Kowalski": 5.9,
+        "Marcin Szkup": 2.5,
+        "Michał Urbanek": 3.8,
+        "Mateusz Ziober": 0.9,
+        "Marcin Ziober": 3.0,
+        "Mariusz od Murzyna": 3.8,
+        "Daniel (od Romy)": 4.4,
+        "Denis": 4.3,
+        "Maciek ER": 6.9,
+        "Wiktor Ostolski": 7.8,
+        "Sławomir Jeleń": 3.6,
+        "Mateusz Szojda": 3.5,
+        "Rafał Baraniec(BR)": 4.5,
+        "Joshua Kimmich": 2.4,
+        "Random 1": 3.9,
+        "Random 2": 3.8,
+        "Random 3": 3.6,
+        "Random 4": 3.5,
+        "Random 5": 3.4,
+        "Random Dobry": 6.5,
+        "Random Zły": 2.5,
+        "Random Bardzo dobry": 8.5,
+    }
+
+let testString = `
+Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Maciek ER /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober /  Rafał Sobota /  Szybki Mati`
+let runInBrowser = true
+// runInBrowser = false
+// calculateSquads(testString, false, runInBrowser, false, 0.5)
+
+
     
 let sumaPowołań = {
         "Szybki Mati": 20,
@@ -113,63 +172,6 @@ let sumaPowołań = {
         "Random Zły": 1,
         "Random Bardzo dobry": 0,
 }
-
-
-    let defenceRanking = {
-        "Andrzej Rukojć": 5.8,
-        "Bartek Pryszcz": 6.8,
-        "Dawid Will": 8.5,
-        "Daniel Toporczyk": 8.5,
-        "Rafał Sobota": 7.3,
-        "Bogumił Gr": 8.9,
-        "Inny": 5.0,
-        "Illia Leo Ti Lish": 2.7,
-        "Paweł Maciejewski": 5.3,
-        "Roma Samkovskiy": 6.6,
-        "Yura Savchuk": 3.7,
-        "Marek Ziober": 3.8,
-        "Kamil Kawa": 6.1,
-        "Kamil Kawa(BR)": 9.0,
-        "Michał Siewniak": 7.8,
-        "Rafał Chrzanowski(BR)": 6.1,
-        "Rafał Chrzanowski": 3.5,
-        "Adam Wisniewski": 5.5,
-        "Ryba": 6.9, //Ryba alias Krzysiek K.
-        "Andrzej Kruczyński(BR)": 6.2,
-        "Aleksander Osmałek": 4.2,
-        "Andrzej Doruchowski": 4.8,
-        "Adam Syrek": 6.9,
-        "Oliwier Sulima": 5.6,
-        "Michal Ce": 6.1,
-        "Tobiasz Fuczek": 5.6,
-        "Adam Piątek": 9.0,
-        "Szybki Mati": 7.9,
-        "Bartek Zdanowski": 8.8,
-        "Szymon Śleziona": 8.6,
-        "Szymon Śleziona(BR)": 7.9,
-        "Lucjan Kowalski": 5.9,
-        "Marcin Szkup": 2.5,
-        "Michał Urbanek": 3.8,
-        "Mateusz Ziober": 0.9,
-        "Marcin Ziober": 3.0,
-        "Mariusz od Murzyna": 3.8,
-        "Daniel (od Romy)": 4.4,
-        "Denis": 4.3,
-        "Maciek ER": 6.9,
-        "Wiktor Ostolski": 7.8,
-        "Sławomir Jeleń": 3.6,
-        "Mateusz Szojda": 3.5,
-        "Rafał Baraniec(BR)": 4.5,
-        "Joshua Kimmich": 2.4,
-        "Random 1": 3.9,
-        "Random 2": 3.8,
-        "Random 3": 3.6,
-        "Random 4": 3.5,
-        "Random 5": 3.4,
-        "Random Dobry": 6.5,
-        "Random Zły": 2.5,
-        "Random Bardzo dobry": 8.5,
-    }
 
 function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwitch = true, variation = 0.2) {
     console.log("variation " + variation)
@@ -296,10 +298,8 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
             team2.push(playerToAdd)
         }
     }
-    console.log("team1f")
-    console.log(team1)
-    console.log("team2f")
-    console.log(team2)
+    team1 = team1.filter(element => element != undefined)
+    team2 = team2.filter(element => element != undefined)
     if (checkIfTeamGot3DefensiveCapable(team1) == false && getNoOfDefenders(team2) > 3) {
         let team2Defenders = team2.filter(element => (defenceRanking[element] > 6.0 && !element.includes("(BR)")))
         let bestDefenderToTakeIndex = 2
@@ -331,7 +331,9 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         team2.sort((a, b) => playersWithRating.get(b) - playersWithRating.get(a))
         team1 = team1.filter(element => element != undefined)
         team2 = team2.filter(element => element != undefined)
+        console.log("team1")
         console.log(team1)
+        console.log("team2")
         console.log(team2)
     }
     if (checkIfTeamGot3DefensiveCapable(team2) == false && getNoOfDefenders(team1) > 3) {
@@ -363,21 +365,32 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         console.log(team1)
         console.log(team2)
         team1 = team1.filter(element => element != undefined)
-        team2 = team2.filter(element => element != undefined)
-        console.log(team1)
-        console.log(team2)
+        team2 = team2.filter(element => element != undefined)  
     }
-    if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
-        let { team1: team1swap, team2: team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
-        team1 = team1swap;
-        team2 = team2swap;
-        console.log("team1")
+    console.log("team1 and team2 after defenders check")
         console.log(team1)
-        console.log("team2")
         console.log(team2)
+    if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+        let { team1:team1swap, team2:team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
+    // // swapGKsIfTeam2GotWeaker(team1, team2);
+        // console.log("After gk swap1")
+        // console.log("team1") 
+        // console.log(team1swap)
+        // console.log("team2swap")
+        // console.log(team2swap)
+        team2 = team2swap;
+        team1 = team1swap;
+        // let swap=team1
+        // team1 = team2;
+        // team2 = swap;
+        // console.log("After gk swap2")
+        // console.log("team1")
+        // console.log(team1)
+        // console.log("team2")
+        // console.log(team2)
     }
     function swapGKsIfTeam2GotWeaker(team1, team2) {
-        if (team1.includes('(BR)') && team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
+        if (team1.some(element => element.includes('(BR)')) && team2.some(element => element.includes('(BR)'))) {
             let gk1 = team1.find(el => el.includes('(BR)'))
             let gk2 = team2.find(el => el.includes('(BR)'))
             console.log("gk1 " + gk1)
@@ -391,6 +404,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
                 team2.push(gk1)
             }
             else {
+                console.log("Swapping gk1 and gk2")
                 team1.push(gk1)
                 team2.push(gk2)
             }
@@ -408,6 +422,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     }
     team1 = team1.filter(element => element != undefined);
     team2 = team2.filter(element => element != undefined);
+    console.log("team1 after swapGKsIfTeam2GotWeaker")
     console.log("team1ToCheck")
     console.log(team1)
     console.log("team2ToCheck")
@@ -464,16 +479,24 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         finalAssign4 = finalAssign4 + '<p></p>'
         finalAssign4 = finalAssign4 + team5[index] + ' / ' + team6[index]
     }
-    if (showInBrowser) {
-        let finalAssign2 = "Team 1    Team 2     (Vote Icon Wow)"
-        for (let index = 0; index < 7; index++) {
-            finalAssign2 = finalAssign2 + '<p></p>'
-            if (index == 5 || index == 6) {
-                finalAssign2 = finalAssign2 + team2[index] + ' / ' + team1[index]
-            } else {
-                finalAssign2 = finalAssign2 + team1[index] + ' / ' + team2[index]
-            }
+    let team7 = [];
+    let team8 = [];
+    let finalAssign2 = "Team 1    Team 2     (Vote Icon Wow)"
+    for (let index = 0; index < 7; index++) {
+        if (index >= 4) {
+            team7[index] = team2[index]
+            team8[index] = team1[index]
+        } else {
+            team7[index] = team1[index]
+            team8[index] = team2[index]
         }
+    }
+    // swapGKsIfTeam2GotWeaker(team8, team7);
+    for (let index = 0; index < 7; index++) {
+        finalAssign2 = finalAssign2 + '<p></p>'
+        finalAssign2 = finalAssign2 + team7[index] + ' / ' + team8[index]
+    }
+    if (showInBrowser) {
         finalAssign = finalAssign.replaceAll("undefined", "")
         finalAssign2 = finalAssign2.replaceAll("undefined", "")
         finalAssign3 = finalAssign3.replaceAll("undefined", "")
@@ -490,12 +513,13 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         document.getElementById('result').innerHTML = finalAssign + "<br><p></p></br>" + finalAssign2
             + "<br><p></p></br>" + finalAssign3 + "<br><p></p></br>" + finalAssign4 + "<br><p></p></br>" + finalAssign5+ "<br><p></p></br>" + finalAssign6
     }
-
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
-        if (player.includes("Dawid Will") && (team1.some(element => element.includes('Szybki Mati')) || team2.some(element => element.includes('Szybki Mati'))) && ((team2.some(element => element.includes('Paweł Maciejewski')))) || team1.some(element => element.includes('Szybki Mati'))) {
+        if (player.includes("Dawid Will") && (team1.some(element => element.includes('Szybki Mati')) || team2.some(element => element.includes('Paweł Maciejewski'))) && ((team2.some(element => element.includes('Szybki Mati')))) || team1.some(element => element.includes('Paweł Maciejewski'))) {
             console.log("Paweł Maciejewski and Szybki Mati found david switch on")
             if(team1.includes('Szybki Mati')&& !team2.includes('Bartek Zdanowski')) {
                 team2.push(player)
+            } else if(team2.includes('Szybki Mati')&& !team1.includes('Bartek Zdanowski')) {
+                team1.push(player)
             } else if (team2.includes('Szybki Mati')) {
                 team2.splice(0, 1)
                 team2.push("Paweł Maciejewski")
@@ -597,6 +621,7 @@ function renderPlayersList() {
         });
 }
 
+if(runInBrowser==true){
 // Uczyń stableRanking globalnym
 window.stableRanking = stableRanking;
 
@@ -604,3 +629,4 @@ window.stableRanking = stableRanking;
 window.onload = function() {
     if (typeof renderPlayersList === "function") renderPlayersList();
 };
+}
