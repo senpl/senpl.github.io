@@ -1,4 +1,10 @@
-☐ Poprawić że skład 2 bramkarze nie są poprawnie zamieniani, Sprawdzić, czemu tak jest
+☐ Niech rating da się w cachu ustawić
+    ☐ Bo to da ludziom większe pole do eksperymentów
+☐ Wyodrębnić funkcję do czyszczenia danych i wywalić ją z calculateFromInput.js
+    ☐ Bo to jest niepotrzebne w tym pliku
+    ☐ ale historycznie składy2 go wymagają
+    ☐ Więc ewentualnie można by to zrobić w składach2
+    ☐ i ich plikach
 ☐ gdy 9ka w team1 to Pick 5 i 6ty do team 2, gdy gramy przeciw dziewiątce
     ☐ Bo w sumie trzeba jakoś przeciwdziałać
 ☐ Dodać oznaczanie bramkarza nie na bramce

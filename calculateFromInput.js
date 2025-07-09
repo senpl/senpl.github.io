@@ -113,7 +113,7 @@ let testString = `
 Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Maciek ER /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober /  Rafał Sobota /  Szybki Mati`
 let runInBrowser = true
 // runInBrowser = false
-// calculateSquads(testString, false, runInBrowser, false, 0.5)
+// calculateSquads(testString, false, runInBrowser, true, 0.5)
 
 
     
@@ -516,14 +516,18 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
     function checkIfPlayerIsAvoidedByDavid(player, team1, team2) {
         if (player.includes("Dawid Will") && (team1.some(element => element.includes('Szybki Mati')) || team2.some(element => element.includes('Paweł Maciejewski'))) && ((team2.some(element => element.includes('Szybki Mati')))) || team1.some(element => element.includes('Paweł Maciejewski'))) {
             console.log("Paweł Maciejewski and Szybki Mati found david switch on")
-            if(team1.includes('Szybki Mati')&& !team2.includes('Bartek Zdanowski')) {
+            if(team1.some(element => element.includes('Szybki Mati')) && !team2.includes('Bartek Zdanowski')) {
                 team2.push(player)
-            } else if(team2.includes('Szybki Mati')&& !team1.includes('Bartek Zdanowski')) {
+            } else if(team2.some(element => element.includes('Szybki Mati')) && !team1.includes('Bartek Zdanowski')) {
                 team1.push(player)
-            } else if (team2.includes('Szybki Mati')) {
+            } else if (team2.some(element => element.includes('Szybki Mati'))) {
                 team2.splice(0, 1)
                 team2.push("Paweł Maciejewski")
                 team1.push(player)
+            } else if (team1.some(element => element.includes('Szybki Mati'))) {
+                team1.splice(0, 1)
+                team1.push("Paweł Maciejewski")
+                team2.push(player)
             } else {
                 team2.splice(0, 1)
                 team1.push("Szybki Mati")
