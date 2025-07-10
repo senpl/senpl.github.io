@@ -9,7 +9,7 @@ let stableRanking = {
         "Ryba": 7.6, //Ryba alias Krzysiek K.
         "Daniel Toporczyk": 8.5,
         "Rafał Sobota": 7.3,
-        "Bogumił Gr": 7.1,
+        "Bogumił Gr": 5.9,
         "Szymon Śleziona": 7.0,
         "Wiktor Ostolski": 6.9,
         "Adam Wisniewski": 6.8,
@@ -71,7 +71,7 @@ let defenceRanking = {
         "Michał Siewniak": 7.8,
         "Rafał Chrzanowski(BR)": 6.1,
         "Rafał Chrzanowski": 3.5,
-        "Adam Wisniewski": 5.5,
+        "Adam Wisniewski": 6.5,
         "Ryba": 6.9, //Ryba alias Krzysiek K.
         "Andrzej Kruczyński(BR)": 6.2,
         "Aleksander Osmałek": 4.2,
