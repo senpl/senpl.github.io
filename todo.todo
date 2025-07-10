@@ -1,5 +1,3 @@
-☐ Niech rating da się w cachu ustawić
-    ☐ Bo to da ludziom większe pole do eksperymentów
 ☐ Wyodrębnić funkcję do czyszczenia danych i wywalić ją z calculateFromInput.js
     ☐ Bo to jest niepotrzebne w tym pliku
     ☐ ale historycznie składy2 go wymagają
@@ -7,39 +5,7 @@
     ☐ i ich plikach
 ☐ gdy 9ka w team1 to Pick 5 i 6ty do team 2, gdy gramy przeciw dziewiątce
     ☐ Bo w sumie trzeba jakoś przeciwdziałać
-☐ Dodać oznaczanie bramkarza nie na bramce
-    ☐ Jak się robi na 2 to nie potrzebne    
-☐ Lepszy sposób na zmieranie danych przez telefon, bo na tą chwilę tylko z kompa jest sprawnie
-    ☐ Wymyślić jakiś sposób na to
-    ☐ Kopiuj 14 razy teksty linku?
-    ☐ Nie optymalne ale zadziała
-☐ Parametr do znanych bramkarzy, żeby była opcja kto nie gra na bramce
-    ☐ Bo to jednak będzie się zmieniać
-☐ Dane w local storage
-    ☐ bo ktoś mógłby sobie nie życzyć
-☐ Wypisywać rating przy zawodnikach
-    ☐ bo to zapobiega potencjalnym pomyłkom
 ☐ Co w przypadku zamian, czy dostosowywać sumą rating'u ???
     ☐ W sumie dało by się to ustawić, jeśli sumarycznie przechodzi zawodnik, to przeciwnicy dobierają, puki rating się nie wyrówna drużyn
-☐ Gdy nie znajdujemy kluczy można by znaleźć, czy mamy taki, który się tak samo zaczyna
-    ☐ i wtedy podstawiać
-☐ Poprawić nie zbieranie całych nazwisk dla Zdanowski i Maciejewski
-    ☐ bo tylko dla nich obcina, choć i z Bartkiem Pryszcz ma problemy
-☐ Na sztywno wypisywanie po ratingu:
-    ☐ Drabinka na środę:
-        ☐ gdzie ostatni trafia do 2 i 3 picka
-    ☐ Drabinka na niedzielę:
-        ☐ Gdzie ostatni trafia do 1 pika
-☐ Dodać na sztywno rating jako osobne pole
-	☐ I lepszego przypisywać do najsłabszego zawodnika
-☐ Dodać stały rating i tymczasowy
-	☐ Dodać stałe ratingi, nie zmieniane na potrzeby chwili
-	☐ i chwilowe, na potrzeby urozmaicania składów
-☐ Dodać rating zapisywany w temp storaga
-    ☐ jako osobna strona
-    ☐ bo jednak to może za dużo na jeden raz
-    ☐ dodać oznaczanie bramkarza
-    ☐ I losowanie do drużyn na podstawie drużyny i oznaczenia bramkarza
 ☐ Dodać zapis form (I gdy forma niska to obniżać rating)
 ☐ Granie w sezonie jako parametryzowany zapis
-☐ Poprawić zbieranie dla Bartek Pryszcz i Bartek Zdanowski, bo obcina ich wartości
