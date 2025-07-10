@@ -1,11 +1,4 @@
-function saveStableRankingToLocalStorage() {
-    localStorage.setItem('stableRanking', JSON.stringify(stableRanking));
-}
-function saveDefenceRankingToLocalStorage() {
-    localStorage.setItem('defenceRanking', JSON.stringify(defenceRanking));
-}
-
-let stableRankingOrg = {
+let stableRanking = {
         "Szybki Mati": 9.0,
         "Bartek Zdanowski": 8.7,
         "Paweł Maciejewski": 8.8,
@@ -60,8 +53,7 @@ let stableRankingOrg = {
         "Random Zły": 2.5,
         "Random Bardzo dobry": 8.5,
     }
-    
-let defenceRankingOrginal = {
+let defenceRanking = {
         "Andrzej Rukojć": 5.8,
         "Bartek Pryszcz": 6.8,
         "Dawid Will": 8.5,
@@ -116,28 +108,12 @@ let defenceRankingOrginal = {
         "Random Zły": 2.5,
         "Random Bardzo dobry": 8.5,
     }
-    const storedRanking = localStorage.getItem('stableRanking');
-if (storedRanking) {
-    stableRanking = JSON.parse(storedRanking);
-} else{
-    stableRanking = stableRankingOrg;
-    saveStableRankingToLocalStorage(stableRankingOrg)
-}
-const storedDefenceRanking = localStorage.getItem('defenceRanking');
-if (storedDefenceRanking) {
-    defenceRanking = JSON.parse(storedDefenceRanking);
-}else{
-    defenceRanking = defenceRankingOrginal;
-    saveDefenceRankingToLocalStorage(defenceRankingOrginal)
-}
-    
-
 
 let testString = `
 Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober  /  Szybki Mati`
 let runInBrowser = true
-// runInBrowser = false
-// calculateSquads(testString, false, runInBrowser, false, 0.5)
+runInBrowser = false
+calculateSquads(testString, false, runInBrowser, false, 0.5)
 
 
     
@@ -639,6 +615,7 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
 
 // Funkcja do generowania klikalnej listy zawodników
 function renderPlayersList() {
+ if (typeof stableRanking === "undefined" || typeof sumaPowołań === "undefined") return;
     if (typeof stableRanking === "undefined" || typeof sumaPowołań === "undefined") return;
     const playersListDiv = document.getElementById('playersList');
     if (!playersListDiv) return;
@@ -646,13 +623,9 @@ function renderPlayersList() {
     Object.keys(stableRanking)
         .sort((a, b) => (sumaPowołań[b] || 0) - (sumaPowołań[a] || 0))
         .forEach(player => {
-            const wrapper = document.createElement('span');
-            wrapper.style.display = "inline-block";
-            wrapper.style.margin = "2px";
-
-            // Button to add player
             const btn = document.createElement('button');
-            btn.textContent = player;
+            btn.textContent = player + " (" + (stableRanking[player] || 0) + ")";
+            btn.style.margin = "2px";
             btn.onclick = function() {
                 const input = document.getElementById('playersNames');
                 if (!input.value.includes(player)) {
@@ -660,39 +633,7 @@ function renderPlayersList() {
                     input.value += player;
                 }
             };
-
-            // Input to edit stable rating
-            const input = document.createElement('input');
-            input.type = "number";
-            input.value = stableRanking[player];
-            input.step = "0.1";
-            input.style.width = "3em";
-            input.style.marginLeft = "4px";
-            input.title = "Stable rating";
-            input.onchange = function() {
-                stableRanking[player] = parseFloat(input.value);
-                saveStableRankingToLocalStorage();
-                renderPlayersList();
-            };
-
-            // Input to edit defence rating
-            const defInput = document.createElement('input');
-            defInput.type = "number";
-            defInput.value = defenceRanking[player] !== undefined ? defenceRanking[player] : '';
-            defInput.step = "0.1";
-            defInput.style.width = "3em";
-            defInput.style.marginLeft = "4px";
-            defInput.title = "Defence rating";
-            defInput.onchange = function () {
-                defenceRanking[player] = parseFloat(defInput.value);
-                saveDefenceRankingToLocalStorage();
-                renderPlayersList();
-            };
-
-            wrapper.appendChild(btn);
-            wrapper.appendChild(input);
-            wrapper.appendChild(defInput);
-            playersListDiv.appendChild(wrapper);
+            playersListDiv.appendChild(btn);
         });
 }
 
