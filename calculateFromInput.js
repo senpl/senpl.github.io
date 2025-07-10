@@ -37,7 +37,7 @@ let stableRanking = {
         "Marcin Szkup": 3.5,
         "Daniel (od Romy)": 3.4,
         "Denis": 3.3,
-        "Illia Leo Ti Lish": 3.2,
+        "Illia Leo Ti Lish": 3.6,
         "Marcin Ziober": 3.0,
         "Mateusz Ziober": 2.9,
         "Sławomir Jeleń": 3.2,
@@ -85,7 +85,7 @@ let defenceRanking = {
         "Bartek Zdanowski": 8.8,
         "Szymon Śleziona": 8.6,
         "Szymon Śleziona(BR)": 7.9,
-        "Lucjan Kowalski": 5.9,
+        "Lucjan Kowalski": 6.1,
         "Marcin Szkup": 2.5,
         "Michał Urbanek": 3.8,
         "Mateusz Ziober": 0.9,
@@ -110,10 +110,10 @@ let defenceRanking = {
     }
 
 let testString = `
-Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Maciek ER /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober /  Rafał Sobota /  Szybki Mati`
+Michał Urbanek /  Bartek Pryszcz /  Illia Leo Ti L /  Dawid Willan> /  Paweł Maci /  Bogumił Grzybowsk /  Lucjan Kowalski /  Aleksander Osmałek /  Szymon Śleziona(BR) /  Rafał Chrzanowski(BR) /  Mateusz Ziober  /  Szybki Mati`
 let runInBrowser = true
-// runInBrowser = false
-// calculateSquads(testString, false, runInBrowser, true, 0.5)
+runInBrowser = false
+calculateSquads(testString, false, runInBrowser, false, 0.5)
 
 
     
@@ -371,15 +371,23 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         console.log(team1)
         console.log(team2)
     if (niedzielneGranie == false) {  //w środy ostatni pick idzie do drugiej drużyny i dostaje lepszego bramkarza.
+        if(team1.length > 6){
         let { team1:team1swap, team2:team2swap } = swapGKsIfTeam2GotWeaker(team1, team2);
+        team2 = team2swap;
+        team1 = team1swap;
+        }else if(team2.length = 6){
+            let { team2:team1swap, team1:team2swap } = swapGKsIfTeam2GotWeaker(team2, team1);
+            team2 = team1swap;
+            team1 = team2swap;
+        }
     // // swapGKsIfTeam2GotWeaker(team1, team2);
         // console.log("After gk swap1")
         // console.log("team1") 
         // console.log(team1swap)
         // console.log("team2swap")
         // console.log(team2swap)
-        team2 = team2swap;
-        team1 = team1swap;
+        // team2 = team2swap;
+        // team1 = team1swap;
         // let swap=team1
         // team1 = team2;
         // team2 = swap;
@@ -469,6 +477,10 @@ function calculateSquads(data, niedzielneGranie, showInBrowser = true, davidSwit
         finalAssign = finalAssign + '<p></p>'
         finalAssign = finalAssign + team1[index] + ' / ' + team2[index]
     }
+    console.log("team1 final")
+    console.log(team1)
+    console.log("team2 final")
+    console.log(team2)
     let finalAssign3 = "Team 1    Team 2     (Vote Icon Trzymaj Się)"
     for (let index = 0; index < 7; index++) {
         finalAssign3 = finalAssign3 + '<p></p>'

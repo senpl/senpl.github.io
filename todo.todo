@@ -1,3 +1,6 @@
+Oddawanie jest zbyt hojne, niech oddaje z najniższym ratingiem
+    ☐ Bo to jest bardziej sprawiedliwe
+    ☐ No i tak powinno być
 ☐ Niech rating da się w cachu ustawić
     ☐ Bo to da ludziom większe pole do eksperymentów
 ☐ Wyodrębnić funkcję do czyszczenia danych i wywalić ją z calculateFromInput.js
