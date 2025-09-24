@@ -1,3 +1,6 @@
+☐ Opcja dodawania gracza
+    ☐ Bardziej zgadywanie przyszłych potrzeb niż rzeczywista potrzeba
+    (można to samo uzyskać edycją local storage)
 ☐ Wyodrębnić funkcję do czyszczenia danych i wywalić ją z calculateFromInput.js
     ☐ Bo to jest niepotrzebne w tym pliku
     ☐ ale historycznie składy2 go wymagają
