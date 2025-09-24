@@ -1,3 +1,9 @@
+☐ Aplikacja do głosowania na składy na androida
+    ☐ Przygotować bazę danych do głosowania i coś co finalnie będzie pokazywać uśrednione głosy
+    ☐ bo to da przeliczanie wtedy, gdy będzie potrzebne
+    ☐ Z przypomnieniem, że nie oddałeś głosu
+    ☐ Każdy może głosować na jego zdaniem ratingi i defensive ratingi
+    ☐ I finalnie pare wariantów układania drużyny zaproponować
 ☐ Opcja dodawania gracza
     ☐ Bardziej zgadywanie przyszłych potrzeb niż rzeczywista potrzeba
     (można to samo uzyskać edycją local storage)
