@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FUT.GG Objectives + Subtasks from Links</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
+    th { background: #f3f3f3; }
+    ul { list-style: disc; margin: 6px 0 0 20px; padding: 0; }
+    li.completed { text-decoration: line-through; color: #666; }
+</style>
+</head>
+<body>
+
+<h1>FUT.GG – Objectives + Subtasks from Links</h1>
+<button onclick="loadObjectives()">Load Objectives + Subtasks</button>
+<button onclick="clearAll()">Clear All</button>
+
+<table>
+<thead>
+<tr>
+    <th>Completed</th>
+    <th>Objective</th>
+    <th>SP</th>
+    <th>Subtasks</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+
+<script>
+const STORAGE_KEY = "futgg-subtasks";
+
+function getDone() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+}
+
+function setDone(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function toggle(id) {
+    const done = getDone();
+    const i = done.indexOf(id);
+    if (i >= 0) done.splice(i, 1);
+    else done.push(id);
+    setDone(done);
+    render(window._objectives);
+}
+
+function clearAll() {
+    localStorage.removeItem(STORAGE_KEY);
+    render(window._objectives);
+}
+
+function render(objectives) {
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = "";
+    const done = getDone();
+
+    objectives.forEach(obj => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td><input type="checkbox" ${done.includes(obj.id) ? "checked" : ""} onchange="toggle('${obj.id}')"></td>
+            <td>${obj.title}</td>
+            <td>${obj.sp}</td>
+            <td id="subs-${obj.id}"></td>
+        `;
+        tbody.appendChild(tr);
+
+        const subsContainer = document.getElementById(`subs-${obj.id}`);
+        if (obj.subs && obj.subs.length > 0) {
+            const ul = document.createElement("ul");
+            obj.subs.forEach(sub => {
+                const li = document.createElement("li");
+                li.className = done.includes(sub.id) ? "completed" : "";
+                li.innerHTML = `<label><input type="checkbox" ${done.includes(sub.id) ? "checked" : ""} onchange="toggle('${sub.id}')"/> ${sub.text}</label>`;
+                ul.appendChild(li);
+            });
+            subsContainer.appendChild(ul);
+        } else {
+            subsContainer.textContent = "Loading...";
+        }
+    });
+}
+
+/* ---------- MAIN ---------- */
+async function loadObjectives() {
+    const url = "https://www.fut.gg/objectives/";
+    const proxy = "https://corsproxy.io/?";
+
+    const res = await fetch(proxy + encodeURIComponent(url));
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+
+    const objectives = [];
+    const links = doc.querySelectorAll("a.grid");
+    const items = doc.querySelectorAll("div.grid > div.bg-gray-600 > *");
+
+    let counter = 0;
+    for (let index = 0; index < links.length; index++) {
+        const link = links[index];
+        console.log(link);
+        const text = items[index].textContent?.trim();
+        console.log("Text:", text);
+        if (!text) continue;
+
+        const match = text.match(/(\d+)\s*(?:SP|Season Points|total)/i);
+        if (!match) continue;
+
+        const title = text.replace(/\s*\d+\s*(?:SP|Season Points|total)/i, "").trim();
+        const sp = match[1] + " SP";
+        const href = link.getAttribute("href");
+        if (!href) continue;
+
+        const obj = { id: `obj-${counter}`, title, sp, href, subs: [] };
+        objectives.push(obj);
+
+        // fetch subtasks from objective link page
+        (async (objRef) => {
+            try {
+                const res2 = await fetch(proxy + encodeURIComponent("https://www.fut.gg" + objRef.href));
+                const html2 = await res2.text();
+                const doc2 = new DOMParser().parseFromString(html2, "text/html");
+                const subNodes = doc2.querySelectorAll("p.text-gray-100");
+
+                objRef.subs = Array.from(subNodes).map((p, i) => ({
+                    id: `${objRef.id}-sub-${i}`,
+                    text: p.textContent?.trim()
+                })).filter(s => s.text);
+
+                render(window._objectives);
+            } catch(e) {
+                console.error("Failed to load subtasks for", objRef.title, e);
+            }
+        })(obj);
+
+        counter++;
+    }
+
+    window._objectives = objectives;
+    render(objectives);
+}
+</script>
+
+</body>
+</html>
