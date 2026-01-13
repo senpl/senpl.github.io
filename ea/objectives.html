@@ -102,9 +102,9 @@ async function loadObjectives() {
     let counter = 0;
     for (let index = 0; index < links.length; index++) {
         const link = links[index];
-        console.log(link);
+        // console.log(link);
         const text = items[index].textContent?.trim();
-        console.log("Text:", text);
+        // console.log("Text:", text);
         if (!text) continue;
 
         const match = text.match(/(\d+)\s*(?:SP|Season Points|total)/i);
