@@ -2,14 +2,109 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>FUT.GG Objectives + Subtasks from Links</title>
 <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
-    th { background: #f3f3f3; }
-    ul { list-style: disc; margin: 6px 0 0 20px; padding: 0; }
-    li.completed { text-decoration: line-through; color: #666; }
+/* ---------- base ---------- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 16px;
+}
+
+button {
+    padding: 10px 14px;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    vertical-align: top;
+}
+
+th {
+    background: #f3f3f3;
+}
+
+ul {
+    list-style: none;      /* removes the dot */
+    padding-left: 0;       /* removes left indent */
+    margin: 6px 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: #666;
+}
+
+/* ---------- checkbox scaling ---------- */
+input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* ---------- mobile layout ---------- */
+@media (max-width: 768px) {
+
+    table, thead, tbody, tr, th, td {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        border: 1px solid #ddd;
+        margin-bottom: 14px;
+        border-radius: 6px;
+        padding: 10px;
+        background: #fafafa;
+    }
+
+    td {
+        border: none;
+        padding: 6px 0;
+    }
+
+    td:first-child {
+        margin-bottom: 8px;
+    }
+
+    td:nth-child(2) {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    td:nth-child(3) {
+        font-size: 14px;
+        color: #444;
+    }
+    td:nth-child(4)::before {
+    content: "Expires: ";
+    font-weight: bold;
+    }
+}
+
+/* ---------- extra touch comfort ---------- */
+label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 </style>
 </head>
 <body>
@@ -98,7 +193,6 @@ async function loadObjectives() {
     const objectives = [];
     const links = doc.querySelectorAll("a.grid");
     const items = doc.querySelectorAll("div.grid > div.bg-gray-600 > *");
-
     let counter = 0;
     for (let index = 0; index < links.length; index++) {
         const link = links[index];
