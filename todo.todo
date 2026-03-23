@@ -1,3 +1,84 @@
+☐ Expiring evos alert
+    ☐ Oznaczanie done w przeglądarce
+        ☐ Jak z wyborem Objectives
+    ☐ Zczytujemy
+     ☐ i oznaczamy completed
+    ☐ https://www.fut.gg/evolutions/
+    ☐ alert w przeglądarce
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EA healper:
+☐ Optimal evo free and cheap
+    ☐ Które evo mamy wolne
+        ☐ wypisać
+            ☐ wypisać automatycznie???
+                ☐ logujemy do web app
+                ☐ i tam zapisujemy dostępne
+                ☐ Chyba nie tak potrzebne
+            ☐ Brillant dribler, party exit, Hight speed action
+        ☐ Następnie je zaznaczamy i wybieramy graczy do ewolucji
+        ☐ trochę ten proces skomplikowany
+    ☐ na początek niech będzie zbierał optimal free
+        ☐ skrypt zaznacza na stronie które mam dostępne ewolucje
+            ☐ w ten sposób jednaoznacznie odpowiada które evo robić
+        ☐ Odpalane 
+    ☐ SBC Observer
+        ☐ https://www.futbin.com/squad-building-challenges?sort=top-rated-desc
+            ☐ W ulubionych
+                ☐ Niech patrzy co można zrobić
+            ☐ I jak mamy nie zrobione to robimy
+                ☐ threshold 89%
+        ☐ https://www.fut.gg/sbc/category/expiring-soon/
+            ☐ I robić te, które się opłaca, czyli duży procent na + mają
+    ☐ a potem porównywał z własnymi evo
+    ☐ i na koniec niech porównuje z płatnymi ewolucjami
+        ☐ Obserwowanie zbliżających się do końca tanich SBC
+    ☐ Zbliżające się rewards evo
+        ☐ dostawać o tym alert
+        ☐ Żeby nie musieć o tym pamiętać
+    ☐ Zadanie dla agenta
+        ☐ niech agent dodaje ewolucje
+        ☐ i je zmienia
+        ☐ niech ustawia parametry jak mu powiem na karcie
+        ☐ dało by się to zrobić
+    ☐ Training and evo remiander
+
+
+
 ☐ Aplikacja do głosowania na składy na androida
     ☐ Przygotować bazę danych do głosowania i coś co finalnie będzie pokazywać uśrednione głosy
     ☐ bo to da przeliczanie wtedy, gdy będzie potrzebne
